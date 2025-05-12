@@ -1,0 +1,33 @@
+programx{
+    main(){
+        int a = 3;
+        int b = 1;
+        int c = 2;
+
+        print("Selection Sort:");
+        selectionSort(a, b, c);
+    }
+
+    int selectionSort(int a, int b, int c){
+
+        if (a > b) {
+            int tmp = a; a = b; b = tmp;
+        }
+
+
+        if (a > c) {
+            int tmp = a; a = c; c = tmp;
+        }
+
+
+        if (b > c) {
+            int tmp = b; b = c; c = tmp;
+        }
+
+
+        print(a);
+        print(b);
+        print(c);
+        return 0;
+    }
+}

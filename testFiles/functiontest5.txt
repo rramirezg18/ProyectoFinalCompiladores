@@ -1,0 +1,9 @@
+program {
+    main() {
+        print(celsiusAFahrenheit(32));
+    }
+
+    float celsiusAFahrenheit(float c) {
+        return (c * 9 / 5) + 32;
+    }
+}

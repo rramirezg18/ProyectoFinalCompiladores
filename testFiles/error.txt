@@ -1,0 +1,6 @@
+miprograma{
+    main(){
+        int x = "hola";
+        print(x);        
+    }
+}

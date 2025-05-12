@@ -1,0 +1,15 @@
+program{
+    main(){
+        float x = 10;
+        float y = 20;
+        float z = x + y * 2;
+        float w = 0;
+        if(z > 30){
+            w = z / 2;
+        }
+        else{
+            w = z - 5;
+        }
+        print(w);
+    }
+}

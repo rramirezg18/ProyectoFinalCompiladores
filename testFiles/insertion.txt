@@ -1,0 +1,33 @@
+programx{
+    main(){
+        int a = 3;
+        int b = 1;
+        int c = 2;
+
+        print("Insertion Sort:");
+        insertionSort(a, b, c);
+    }
+
+    int insertionSort(int a, int b, int c){
+
+        if (b < a) {
+            int tmp = b; b = a; a = tmp;
+        }
+
+
+        if (c < b) {
+            int tmp = c; c = b; b = tmp;
+        }
+
+
+        if (b < a) {
+            int tmp = b; b = a; a = tmp;
+        }
+
+
+        print(a);
+        print(b);
+        print(c);
+        return 0;
+    }
+}

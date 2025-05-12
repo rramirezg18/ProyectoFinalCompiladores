@@ -1,0 +1,32 @@
+programx{
+    main(){
+
+        int a = 3;
+        int b = 1;
+        int c = 2;
+
+        print("Bubble Sort:");
+        bubbleSort(a, b, c);
+    }
+
+
+    int bubbleSort(int a, int b, int c){
+
+        if (a > b) {
+            int tmp = a; a = b; b = tmp;
+        }
+        if (b > c) {
+            int tmp = b; b = c; c = tmp;
+        }
+
+        if (a > b) {
+            int tmp = a; a = b; b = tmp;
+        }
+
+
+        print(a);
+        print(b);
+        print(c);
+        return 0;
+    }
+}

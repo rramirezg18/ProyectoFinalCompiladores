@@ -1,0 +1,24 @@
+programita{
+main(){
+	int x = 1;
+	int y = 1;
+	int z = x + y;
+	print(z);
+	int a = 2;
+	int b = 3;
+	int r = a + b;
+	print(r);
+	float f = 2.3;
+	float g = 2.2;
+	float res = f + g;
+	print(res);
+	string k = "hola";
+	print(k);
+	int NuM1 = 2 + 3;
+	int nuM2 = 5;
+	int resultado = NuM1 + nuM2;
+	print(resultado);
+	//print("hola" + "hola");
+	//print("El resultado es = " + res);
+}
+}

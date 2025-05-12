@@ -1,0 +1,14 @@
+program{
+    main(){
+        int numero1 = 5;
+        int numero2 = 5;
+        suma();
+
+    }
+    int suma(){
+        int numero1 = 5;
+        int numero2 = 5;
+        int resultado = numero1 + numero2;
+        print(resultado);
+    }
+}

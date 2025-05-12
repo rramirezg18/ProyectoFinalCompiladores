@@ -1,0 +1,21 @@
+programx{
+    main(){
+        int n = 3;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i != j) {
+                    for (int k = 1; k <= n; k++) {
+                        if (k != i) {
+                            if (k != j) {
+
+                                int perm = i * 100 + j * 10 + k;
+                                print(perm);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
