@@ -1,0 +1,15 @@
+program {
+    main() {
+        int x = 5;
+        int y = 8;
+        print(10);
+    }
+
+    int funcion(){
+        return 2;
+    }
+
+    int funcion(){
+        return 2;
+    }
+}

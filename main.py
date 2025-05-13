@@ -183,6 +183,13 @@ def compilar(optimizar=False, solo_ir=False):
             listener = AnalizadorSemantico(tabla)
             walker = ParseTreeWalker()
             walker.walk(listener, tree)
+            
+            # Mostrar warnings si existen
+            if listener.warnings:
+                print("\n[!] Warnings detectados:")
+                for warn in listener.warnings:
+                    print(f"  → {warn}")
+            
             print("✓ No se encontraron errores semánticos")
 
         # 4. Ejecución del Visitor
@@ -254,7 +261,11 @@ def compilar(optimizar=False, solo_ir=False):
                         subprocess.run([f"./{nombre_base}"])
 
     except Exception as e:
-        print(f"\n✗ Error durante la compilación: {str(e)}")
+        # Manejar errores con línea
+        if "Línea" in str(e):  
+            print(f"\n✗ Error semántico: {str(e)}")
+        else:
+            print(f"\n✗ Error durante la compilación: {str(e)}")
     
 def compilar_desde_ir():
     # Listar archivos .ll en la carpeta optManual
