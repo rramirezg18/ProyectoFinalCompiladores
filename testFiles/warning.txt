@@ -9,7 +9,4 @@ program {
         return 2;
     }
 
-    int funcion(){
-        return 2;
-    }
 }

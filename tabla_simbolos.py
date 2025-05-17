@@ -5,16 +5,16 @@ class TablaSimbolos:
         self.current_return_type = None
         self.var_declared = set()  
         self.var_used = set()  
-        self.func_declared = set()  # <--- Nombre correcto (con "a")
+        self.func_declared = set()  
         self.func_used = set()
 
-        # Agregar 'print' como función predefinida
+      
         self.funciones['print'] = {
             'tipo_retorno': 'void',
-            'parametros': [('any', 'mensaje')]  # Ajusta los parámetros según necesites
+            'parametros': [('any', 'mensaje')] 
         }
-        self.func_declared.add('print')  # <--- Nombre correcto
-        self.func_used.add('print')  # <--- Marcar como usada
+        self.func_declared.add('print') 
+        self.func_used.add('print') 
 
         # Valores predefinidos
         self.entornos[0]['true'] = 'boolean'
@@ -81,5 +81,5 @@ class TablaSimbolos:
             return True
         if target_type == "float" and expr_type == "int":
             return True
-        # Eliminar el raise aquí y dejar que el listener maneje el error
-        return False  # <--- Solo retorna True/False, no lanza excepciones
+
+        return False 

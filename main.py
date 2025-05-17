@@ -44,20 +44,33 @@ def mostrar_menu_principal():
 
 def seleccionar_archivo_ll():
     print("\n=== Selección de archivo IR ===")
-    print("1. Usar archivo de testFiles")
-    print("2. Usar archivo optimizado manualmente")
+    print("1. Optimizados manualmente (optManual)")
+    print("2. Optimizados automáticamente (opt)")
+    print("3. Sin optimizar (codigoIR)")
+    
     opcion = input("Seleccione origen del .ll: ")
     
-    directorio = "testFiles" if opcion == "1" else "optManual"
+    directorios = {
+        "1": "optManual",
+        "2": "opt",
+        "3": "codigoIR"
+    }
+    
+    directorio = directorios.get(opcion)
+    if not directorio:
+        print("Opción inválida!")
+        return None
+    
     if not os.path.exists(directorio):
-        print(f"Directorio {directorio} no existe!")
+        print(f"✗ Error: No existe el directorio {directorio}")
         return None
     
     archivos = [f for f in os.listdir(directorio) if f.endswith('.ll')]
     if not archivos:
-        print("No hay archivos .ll en el directorio")
+        print(f"No hay archivos .ll en {directorio}")
         return None
 
+    print(f"\n=== Archivos en {directorio} ===")
     for i, f in enumerate(archivos, 1):
         print(f"{i}. {f}")
     
@@ -66,7 +79,6 @@ def seleccionar_archivo_ll():
         return os.path.join(directorio, archivos[seleccion-1])
     except:
         return None
-
 
 def convertir_a_exe():
     try:
@@ -83,31 +95,35 @@ def convertir_a_exe():
     if not archivo_ll:
         return
 
+    # Crear carpeta para ejecutables
+    os.makedirs("ejecutableEXE", exist_ok=True)
     nombre_base = os.path.splitext(os.path.basename(archivo_ll))[0]
     
     try:
         with Timer("Generación de ejecutable Windows"):
             print("\n[1/2] Generando objeto Windows...")
+            obj_path = os.path.join("ejecutableEXE", f"{nombre_base}.obj")
             subprocess.run([
                 "llc",
                 "-mtriple=x86_64-pc-windows-gnu",
                 "-filetype=obj",
                 archivo_ll,
                 "-o",
-                f"{nombre_base}.obj"
+                obj_path
             ], check=True)
             
             print("[2/2] Generando .exe...")
+            exe_path = os.path.join("ejecutableEXE", f"{nombre_base}.exe")
             subprocess.run([
                 "x86_64-w64-mingw32-gcc",
                 "-o",
-                f"{nombre_base}.exe",
-                f"{nombre_base}.obj",
+                exe_path,
+                obj_path,
                 "-lm",
                 "-static"
             ], check=True)
             
-            print(f"\n✓ Ejecutable Windows generado: {nombre_base}.exe")
+            print(f"\n✓ Ejecutable Windows generado: {exe_path}")
         
     except subprocess.CalledProcessError as e:
         print(f"\n✗ Error en compilación: {e}")
@@ -209,7 +225,16 @@ def compilar(optimizar=False, solo_ir=False):
             modulo_llvm = ir_generador.generar()
             
             nombre_base = os.path.splitext(os.path.basename(archivo_entrada))[0]
-            archivo_ll = f"{nombre_base}.ll"
+            
+            # Determinar carpeta destino
+            if solo_ir:
+                output_dir = "codigoIR"
+                os.makedirs(output_dir, exist_ok=True)
+                archivo_ll = os.path.join(output_dir, f"{nombre_base}.ll")
+            else:
+                output_dir = "codigoIR" if not optimizar else "opt"
+                os.makedirs(output_dir, exist_ok=True)
+                archivo_ll = os.path.join(output_dir, f"{nombre_base}.ll")
             
             with open(archivo_ll, "w") as f:
                 f.write(str(modulo_llvm))
@@ -234,31 +259,49 @@ def compilar(optimizar=False, solo_ir=False):
                 pmb.populate(pm)
                 pm.run(llvm_mod)
                 
-                archivo_opt = f"{nombre_base}_opt.ll"
+                # Guardar en carpeta opt
+                os.makedirs("opt", exist_ok=True)
+                archivo_opt = os.path.join("opt", f"{nombre_base}_O2.ll")
                 with open(archivo_opt, "w") as f:
                     f.write(str(llvm_mod))
                 print(f"✓ IR optimizado generado: {archivo_opt}")
                 archivo_ll = archivo_opt
 
-        # 8. Compilación a binario
-        compilar = input("\n¿Desea compilar a binario? (s/n): ").lower()
-        if compilar == 's':
-            with Timer("Compilación a binario"):
-                subprocess.run([
-                    "clang", 
-                    "-o", 
-                    nombre_base, 
-                    archivo_ll, 
-                    "-lm"
-                ])
-                print(f"✓ Ejecutable generado: ./{nombre_base}")
-                
-                # Ejecutar el programa
-                ejecutar = input("¿Desea ejecutar el programa? (s/n): ").lower()
-                if ejecutar == 's':
-                    with Timer("Ejecución del programa"):
-                        print("\nSalida del programa:")
-                        subprocess.run([f"./{nombre_base}"])
+        # 8. Compilación y ejecución automáticas
+        with Timer("Compilación a binario"):
+            subprocess.run([
+                "clang", 
+                "-o", 
+                nombre_base, 
+                archivo_ll, 
+                "-lm"
+            ])
+            print(f"✓ Ejecutable generado: ./{nombre_base}")
+            
+            # Ejecución automática del programa
+            with Timer("Ejecución del programa"):
+                print("\n=== Salida del programa ===")
+                subprocess.run([f"./{nombre_base}"])
+
+        # Líneas originales comentadas:
+        # compilar = input("\n¿Desea compilar a binario? (s/n): ").lower()
+        # if compilar == 's':
+        #    with Timer("Compilación a binario"):
+        #        subprocess.run([
+        #            "clang", 
+        #            "-o", 
+        #            nombre_base, 
+        #            archivo_ll, 
+        #            "-lm"
+        #        ])
+        #        print(f"✓ Ejecutable generado: ./{nombre_base}")
+        #        
+        #        # Ejecutar el programa
+        #        ejecutar = input("¿Desea ejecutar el programa? (s/n): ").lower()
+        #        if ejecutar == 's':
+        #            with Timer("Ejecución del programa"):
+        #                print("\nSalida del programa:")
+        #                subprocess.run([f"./{nombre_base}"])
 
     except Exception as e:
         # Manejar errores con línea
@@ -320,12 +363,17 @@ def compilar_desde_ir():
             
             print(f"\n✓ Ejecutable generado: ./{nombre_base}")
             
-            # Ejecutar el programa
-            ejecutar = input("\n¿Desea ejecutar el programa? (s/n): ").lower()
-            if ejecutar == 's':
-                with Timer("Ejecución del programa"):
-                    print("\n=== Salida del programa ===")
-                    subprocess.run([f"./{nombre_base}"])
+            # Ejecución automática
+            with Timer("Ejecución del programa"):
+                print("\n=== Salida del programa ===")
+                subprocess.run([f"./{nombre_base}"])
+
+            # Líneas originales comentadas:
+            # ejecutar = input("\n¿Desea ejecutar el programa? (s/n): ").lower()
+            # if ejecutar == 's':
+            #    with Timer("Ejecución del programa"):
+            #        print("\n=== Salida del programa ===")
+            #        subprocess.run([f"./{nombre_base}"])
                 
     except subprocess.CalledProcessError as e:
         print(f"\n✗ Error durante la compilación: {str(e)}")

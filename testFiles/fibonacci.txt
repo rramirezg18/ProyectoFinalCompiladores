@@ -1,6 +1,6 @@
 programx{
     main(){
-        int n = 10;
+        int n = 1000000;
         int a = 0;
         int b = 1;
 
