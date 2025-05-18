@@ -15,8 +15,9 @@ import time
 from datetime import timedelta
 
 class Timer:
-    def __init__(self, phase_name):
+    def __init__(self, phase_name, phase_times):
         self.phase_name = phase_name
+        self.phase_times = phase_times  # Lista para almacenar los tiempos
         
     def __enter__(self):
         print(f"\n[*] Iniciando fase: {self.phase_name}")
@@ -24,9 +25,12 @@ class Timer:
         return self
         
     def __exit__(self, exc_type, exc_val, exc_tb):
-        elapsed = timedelta(seconds=time.monotonic() - self.start)
+        elapsed = time.monotonic() - self.start
+        elapsed_td = timedelta(seconds=elapsed)
         status = "COMPLETADO" if not exc_type else "FALLÓ"
-        print(f"[+] {self.phase_name} {status} - Tiempo: {elapsed}")
+        print(f"[+] {self.phase_name} {status} - Tiempo: {elapsed_td}")
+        # Agregar a la lista de tiempos
+        self.phase_times.append((self.phase_name, elapsed))
 
 class MiErrorListener(ErrorListener):
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
@@ -80,26 +84,34 @@ def seleccionar_archivo_ll():
     except:
         return None
 
+
+
 def convertir_a_exe():
+    total_start = time.monotonic()
+    
     try:
         with Timer("Verificación de dependencias"):
             subprocess.run(["x86_64-w64-mingw32-gcc", "--version"], 
                           stdout=subprocess.DEVNULL, 
                           stderr=subprocess.DEVNULL)
     except:
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
         print("\n✗ Error: Requiere mingw-w64 instalado.")
         print("Instale con: sudo apt-get install mingw-w64")
+        print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
         return
     
     archivo_ll = seleccionar_archivo_ll()
     if not archivo_ll:
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+        print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
         return
 
-    # Crear carpeta para ejecutables
-    os.makedirs("ejecutableEXE", exist_ok=True)
-    nombre_base = os.path.splitext(os.path.basename(archivo_ll))[0]
-    
     try:
+        # Crear carpeta para ejecutables
+        os.makedirs("ejecutableEXE", exist_ok=True)
+        nombre_base = os.path.splitext(os.path.basename(archivo_ll))[0]
+        
         with Timer("Generación de ejecutable Windows"):
             print("\n[1/2] Generando objeto Windows...")
             obj_path = os.path.join("ejecutableEXE", f"{nombre_base}.obj")
@@ -125,10 +137,17 @@ def convertir_a_exe():
             
             print(f"\n✓ Ejecutable Windows generado: {exe_path}")
         
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+        print(f"\n[!] TIEMPO TOTAL DE COMPILACIÓN: {total_elapsed}")
+
     except subprocess.CalledProcessError as e:
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
         print(f"\n✗ Error en compilación: {e}")
+        print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
     except Exception as e:
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
         print(f"\n✗ Error inesperado: {e}")
+        print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
 
     
 
@@ -162,105 +181,92 @@ def listar_archivos_test():
         print("Entrada inválida")
         return None
 
+
+
+
+
+
+
 def compilar(optimizar=False, solo_ir=False):
     archivo_entrada = listar_archivos_test()
     if not archivo_entrada:
         return
+
+    total_start = time.monotonic()
+    phase_times = []  # Lista para recopilar tiempos
 
     try:
         # Configurar listeners de error
         error_listener = MiErrorListener()
         
         # 1. Fase de Análisis Léxico
-        with Timer("Análisis léxico"):
+        with Timer("Análisis léxico", phase_times):
             input_stream = FileStream(archivo_entrada)
             lexer = GramaticaLexer(input_stream)
             lexer.removeErrorListeners()
             lexer.addErrorListener(error_listener)
-            
-            # Generar tokens y verificar errores léxicos
             tokens = CommonTokenStream(lexer)
-            tokens.fill()  # Fuerza el análisis léxico completo
-            
+            tokens.fill()
             print("✓ No se encontraron errores léxicos")
 
         # 2. Fase de Análisis Sintáctico
-        with Timer("Análisis sintáctico"):
+        with Timer("Análisis sintáctico", phase_times):
             parser = GramaticaParser(tokens)
             parser.removeErrorListeners()
             parser.addErrorListener(error_listener)
-            tree = parser.gramatica()  # Construye el árbol sintáctico
-            
+            tree = parser.gramatica()
             print("✓ No se encontraron errores sintácticos")
 
         # 3. Análisis Semántico
-        with Timer("Análisis semántico"):
+        with Timer("Análisis semántico", phase_times):
             tabla = TablaSimbolos()
             listener = AnalizadorSemantico(tabla)
             walker = ParseTreeWalker()
             walker.walk(listener, tree)
-            
-            # Mostrar warnings si existen
             if listener.warnings:
                 print("\n[!] Warnings detectados:")
                 for warn in listener.warnings:
                     print(f"  → {warn}")
-            
             print("✓ No se encontraron errores semánticos")
 
         # 4. Ejecución del Visitor
-        with Timer("Ejecución del código"):
+        with Timer("Ejecución del código", phase_times):
             visitor = AnalizadorVisitor()
             visitor.visit(tree)
             print("✓ Ejecución completada")
 
         # 5. Generación de AST
-        with Timer("Generación de AST"):
+        with Timer("Generación de AST", phase_times):
             ast_constructor = ASTconstructor()
             ast = ast_constructor.visit(tree)
 
         # 6. Generación de IR
-        with Timer("Generación de código intermedio"):
+        with Timer("Generación de código intermedio", phase_times):
             ir_generador = IRgenerador(ast, tabla)
             modulo_llvm = ir_generador.generar()
-            
             nombre_base = os.path.splitext(os.path.basename(archivo_entrada))[0]
-            
-            # Determinar carpeta destino
-            if solo_ir:
-                output_dir = "codigoIR"
-                os.makedirs(output_dir, exist_ok=True)
-                archivo_ll = os.path.join(output_dir, f"{nombre_base}.ll")
-            else:
-                output_dir = "codigoIR" if not optimizar else "opt"
-                os.makedirs(output_dir, exist_ok=True)
-                archivo_ll = os.path.join(output_dir, f"{nombre_base}.ll")
-            
+            output_dir = "codigoIR" if solo_ir else "opt" if optimizar else "codigoIR"
+            os.makedirs(output_dir, exist_ok=True)
+            archivo_ll = os.path.join(output_dir, f"{nombre_base}.ll")
             with open(archivo_ll, "w") as f:
                 f.write(str(modulo_llvm))
-            
             if solo_ir:
                 print(f"\nArchivo IR generado: {archivo_ll}")
                 return
 
         # 7. Optimización (si se solicita)
         if optimizar:
-            with Timer("Optimización de código"):
+            with Timer("Optimización de código", phase_times):
                 llvm.initialize()
                 llvm.initialize_native_target()
                 llvm.initialize_native_asmprinter()
-                
                 llvm_mod = llvm.parse_assembly(str(modulo_llvm))
                 llvm_mod.verify()
-                
                 pmb = llvm.PassManagerBuilder()
                 pmb.opt_level = 2
                 pm = llvm.ModulePassManager()
                 pmb.populate(pm)
                 pm.run(llvm_mod)
-                
-                # Guardar en carpeta opt
-                os.makedirs("opt", exist_ok=True)
                 archivo_opt = os.path.join("opt", f"{nombre_base}_O2.ll")
                 with open(archivo_opt, "w") as f:
                     f.write(str(llvm_mod))
@@ -268,117 +274,129 @@ def compilar(optimizar=False, solo_ir=False):
                 archivo_ll = archivo_opt
 
         # 8. Compilación y ejecución automáticas
-        with Timer("Compilación a binario"):
-            subprocess.run([
-                "clang", 
-                "-o", 
-                nombre_base, 
-                archivo_ll, 
-                "-lm"
-            ])
+        with Timer("Compilación a binario", phase_times):
+            subprocess.run(["clang", "-o", nombre_base, archivo_ll, "-lm"])
             print(f"✓ Ejecutable generado: ./{nombre_base}")
             
-            # Ejecución automática del programa
-            with Timer("Ejecución del programa"):
+            with Timer("Ejecución del programa", phase_times):
                 print("\n=== Salida del programa ===")
                 subprocess.run([f"./{nombre_base}"])
 
-        # Líneas originales comentadas:
-        # compilar = input("\n¿Desea compilar a binario? (s/n): ").lower()
-        # if compilar == 's':
-        #    with Timer("Compilación a binario"):
-        #        subprocess.run([
-        #            "clang", 
-        #            "-o", 
-        #            nombre_base, 
-        #            archivo_ll, 
-        #            "-lm"
-        #        ])
-        #        print(f"✓ Ejecutable generado: ./{nombre_base}")
-        #        
-        #        # Ejecutar el programa
-        #        ejecutar = input("¿Desea ejecutar el programa? (s/n): ").lower()
-        #        if ejecutar == 's':
-        #            with Timer("Ejecución del programa"):
-        #                print("\nSalida del programa:")
-        #                subprocess.run([f"./{nombre_base}"])
+        # Mostrar tiempos por fase
+        print("\nTiempos por fase:")
+        for phase_name, elapsed in phase_times:
+            td = timedelta(seconds=elapsed)
+            hours = td.seconds // 3600
+            minutes = (td.seconds % 3600) // 60
+            seconds = td.seconds % 60
+            microseconds = td.microseconds
+            time_str = f"{hours}:{minutes:02}:{seconds:02}:{microseconds:06d}"
+            time_str = time_str[:-2]  # Quitar los últimos dos dígitos para 4 decimales
+            print(f"{phase_name.ljust(25)} {time_str}")
+
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+        print(f"\n[!] TIEMPO TOTAL DE COMPILACIÓN: {total_elapsed}")
 
     except Exception as e:
-        # Manejar errores con línea
+        if phase_times:
+            print("\nTiempos por fase hasta el error:")
+            for phase_name, elapsed in phase_times:
+                td = timedelta(seconds=elapsed)
+                hours = td.seconds // 3600
+                minutes = (td.seconds % 3600) // 60
+                seconds = td.seconds % 60
+                microseconds = td.microseconds
+                time_str = f"{hours}:{minutes:02}:{seconds:02}:{microseconds:06d}"
+                time_str = time_str[:-2]
+                print(f"{phase_name.ljust(25)} {time_str}")
+
         if "Línea" in str(e):  
             print(f"\n✗ Error semántico: {str(e)}")
         else:
             print(f"\n✗ Error durante la compilación: {str(e)}")
-    
+        
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+        print(f"\n[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
+
+
+
 def compilar_desde_ir():
-    # Listar archivos .ll en la carpeta optManual
-    opt_dir = "optManual"
-    if not os.path.exists(opt_dir):
-        print(f"\nError: No existe el directorio {opt_dir}")
-        return
-    
-    archivos = [f for f in os.listdir(opt_dir) if f.endswith('.ll')]
-    if not archivos:
-        print("\nNo hay archivos .ll en el directorio optManual")
-        return
-
-    print("\n=== Archivos optimizados disponibles ===")
-    for i, archivo in enumerate(archivos, 1):
-        print(f"{i}. {archivo}")
+    total_start = time.monotonic()
     
     try:
-        seleccion = int(input("\nSeleccione un archivo (número): "))
-        if 1 <= seleccion <= len(archivos):
-            archivo_ll = os.path.join(opt_dir, archivos[seleccion-1])
-        else:
-            print("Selección inválida")
+        # Listar archivos .ll en la carpeta optManual
+        opt_dir = "optManual"
+        if not os.path.exists(opt_dir):
+            print(f"\nError: No existe el directorio {opt_dir}")
             return
-    except ValueError:
-        print("Entrada inválida")
-        return
+        
+        archivos = [f for f in os.listdir(opt_dir) if f.endswith('.ll')]
+        if not archivos:
+            print("\nNo hay archivos .ll en el directorio optManual")
+            return
 
-    nombre_base = os.path.splitext(os.path.basename(archivo_ll))[0]
-    
-    try:
-        with Timer("Compilación desde IR optimizado"):
-            # Compilar a objeto
-            print("\nCompilando a binario...")
-            subprocess.run([
-                "llc", 
-                "-filetype=obj",
-                "-relocation-model=pic",
-                archivo_ll, 
-                "-o", 
-                f"{nombre_base}.o"
-            ], check=True)
-            
-            subprocess.run([
-                "clang",
-                "-o", 
-                nombre_base, 
-                f"{nombre_base}.o", 
-                "-lm",
-                "-no-pie"
-            ], check=True)
-            
-            print(f"\n✓ Ejecutable generado: ./{nombre_base}")
-            
-            # Ejecución automática
-            with Timer("Ejecución del programa"):
-                print("\n=== Salida del programa ===")
-                subprocess.run([f"./{nombre_base}"])
+        print("\n=== Archivos optimizados disponibles ===")
+        for i, archivo in enumerate(archivos, 1):
+            print(f"{i}. {archivo}")
+        
+        try:
+            seleccion = int(input("\nSeleccione un archivo (número): "))
+            if 1 <= seleccion <= len(archivos):
+                archivo_ll = os.path.join(opt_dir, archivos[seleccion-1])
+            else:
+                print("Selección inválida")
+                return
+        except ValueError:
+            print("Entrada inválida")
+            return
 
-            # Líneas originales comentadas:
-            # ejecutar = input("\n¿Desea ejecutar el programa? (s/n): ").lower()
-            # if ejecutar == 's':
-            #    with Timer("Ejecución del programa"):
-            #        print("\n=== Salida del programa ===")
-            #        subprocess.run([f"./{nombre_base}"])
+        nombre_base = os.path.splitext(os.path.basename(archivo_ll))[0]
+        
+        try:
+            with Timer("Compilación desde IR optimizado"):
+                # Compilar a objeto
+                print("\nCompilando a binario...")
+                subprocess.run([
+                    "llc", 
+                    "-filetype=obj",
+                    "-relocation-model=pic",
+                    archivo_ll, 
+                    "-o", 
+                    f"{nombre_base}.o"
+                ], check=True)
                 
-    except subprocess.CalledProcessError as e:
-        print(f"\n✗ Error durante la compilación: {str(e)}")
+                subprocess.run([
+                    "clang",
+                    "-o", 
+                    nombre_base, 
+                    f"{nombre_base}.o", 
+                    "-lm",
+                    "-no-pie"
+                ], check=True)
+                
+                print(f"\n✓ Ejecutable generado: ./{nombre_base}")
+                
+                # Ejecución automática
+                with Timer("Ejecución del programa"):
+                    print("\n=== Salida del programa ===")
+                    subprocess.run([f"./{nombre_base}"])
+
+            total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+            print(f"\n[!] TIEMPO TOTAL DE COMPILACIÓN: {total_elapsed}")
+
+        except subprocess.CalledProcessError as e:
+            total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+            print(f"\n✗ Error durante la compilación: {str(e)}")
+            print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
+        except Exception as e:
+            total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+            print(f"\n✗ Error inesperado: {str(e)}")
+            print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
+                
     except Exception as e:
-        print(f"\n✗ Error inesperado: {str(e)}")
+        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+        print(f"\n✗ Error: {str(e)}")
+        print(f"[!] TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
 
 def main():
     llvm.initialize()
