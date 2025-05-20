@@ -132,7 +132,6 @@ class AnalizadorVisitor(GramaticaVisitor):
     # return expr;
     def visitSentencia_return(self, ctx:GramaticaParser.Sentencia_returnContext):
         value = self.visit(ctx.expr())
-        # en lugar de return, lanzamos la excepción
         raise ReturnException(value)
 
     # Función: tipo VARIABLE (parametros)? { instrucciones (return expr)? }

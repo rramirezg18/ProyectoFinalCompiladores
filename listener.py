@@ -112,7 +112,7 @@ class AnalizadorSemantico(GramaticaListener):
         tipo_retorno = ctx.tipo().getText() if ctx.tipo() else "void"
         self.tabla.push_env()
         if ctx.parametros():
-            for tipo, var in zip(ctx.parametros().tipo(), ctx.parametros().VARIABLE()):  # <--- "parametros()", no "paramentros()"
+            for tipo, var in zip(ctx.parametros().tipo(), ctx.parametros().VARIABLE()): 
                 self.tabla.agregar_variable(var.getText(), tipo.getText())
 
     def exitFuncion(self, ctx:GramaticaParser.FuncionContext):

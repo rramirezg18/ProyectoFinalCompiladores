@@ -131,8 +131,7 @@ class ASTconstructor(GramaticaVisitor):
         
         # Procesa las cláusulas "else if" (si existen)
         elif_blocks = []
-        # Suponemos que las condiciones de "else if" están a partir del índice 1
-        # y que los bloques correspondientes se ubican en los índices 1..n-1
+
         expr_count = len(ctx.expr())
         block_count = len(ctx.bloque())
         for i in range(1, expr_count):
