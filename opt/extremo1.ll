@@ -4,6 +4,12 @@ target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
+declare i8* @"strcpy"(i8* %".1", i8* %".2")
+
+declare i8* @"strcat"(i8* %".1", i8* %".2")
+
+declare i32 @"sprintf"(i8* %".1", i8* %".2", ...)
+
 define i32 @"potencia"(i32 %".1", i32 %".2")
 {
 entry:
@@ -181,7 +187,7 @@ ifcont.1:
 define i32 @"main"()
 {
 entry:
-  %".2" = bitcast [21 x i8]* @"str.9043851232501393598" to i8*
+  %".2" = bitcast [21 x i8]* @"str.4872056056157938008" to i8*
   %".3" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".4" = call i32 (i8*, ...) @"printf"(i8* %".3", i8* %".2")
   %"num4" = alloca i32
@@ -367,7 +373,7 @@ for.exit:
   %"var" = alloca i32
   store i32 5, i32* %"var"
   %"saludo" = alloca i8*
-  %".164" = bitcast [12 x i8]* @"str.-558925923256452233" to i8*
+  %".164" = bitcast [12 x i8]* @"str.5192677022118876718" to i8*
   store i8* %".164", i8** %"saludo"
   %"saludo.1" = load i8*, i8** %"saludo"
   %".166" = bitcast [4 x i8]* @"fmt_string" to i8*
@@ -410,7 +416,7 @@ while.cond:
   %".194" = icmp sge i32 %"p.1", 0
   br i1 %".194", label %"while.body", label %"while.end"
 while.body:
-  %".196" = bitcast [5 x i8]* @"str.-1885033220538333473" to i8*
+  %".196" = bitcast [5 x i8]* @"str.430847042101993405" to i8*
   %".197" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".198" = call i32 (i8*, ...) @"printf"(i8* %".197", i8* %".196")
   %"p.2" = load i32, i32* %"p"
@@ -670,16 +676,16 @@ for.inc.2:
   br label %"for.cond.2"
 for.exit.2:
   %"juan" = alloca i8*
-  %".422" = bitcast [4 x i8]* @"str.3624716936794051486" to i8*
+  %".422" = bitcast [4 x i8]* @"str.-4278983444431560600" to i8*
   store i8* %".422", i8** %"juan"
   %"juan.1" = load i8*, i8** %"juan"
   %".424" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".425" = call i32 (i8*, ...) @"printf"(i8* %".424", i8* %"juan.1")
-  %".426" = bitcast [11 x i8]* @"str.-291738176495125186" to i8*
+  %".426" = bitcast [11 x i8]* @"str.-8002891238796560256" to i8*
   %".427" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".428" = call i32 (i8*, ...) @"printf"(i8* %".427", i8* %".426")
   %".429" = call i32 @"suma"()
-  %".430" = bitcast [73 x i8]* @"str.-4532116965998049198" to i8*
+  %".430" = bitcast [73 x i8]* @"str.-5829457613633069353" to i8*
   %".431" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".432" = call i32 (i8*, ...) @"printf"(i8* %".431", i8* %".430")
   %"a" = alloca i32
@@ -691,13 +697,13 @@ for.exit.2:
   %"b.1" = load i32, i32* %"b"
   %".436" = bitcast [4 x i8]* @"fmt_int" to i8*
   %".437" = call i32 (i8*, ...) @"printf"(i8* %".436", i32 %"b.1")
-  %".438" = bitcast [19 x i8]* @"str.-3630281701490530344" to i8*
+  %".438" = bitcast [19 x i8]* @"str.909977619926745658" to i8*
   %".439" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".440" = call i32 (i8*, ...) @"printf"(i8* %".439", i8* %".438")
   %".441" = call i32 @"funcionB"(i32 5)
   %".442" = bitcast [4 x i8]* @"fmt_int" to i8*
   %".443" = call i32 (i8*, ...) @"printf"(i8* %".442", i32 %".441")
-  %".444" = bitcast [2 x i8]* @"str.5795652382185968157" to i8*
+  %".444" = bitcast [2 x i8]* @"str.-8375339648621677614" to i8*
   %".445" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".446" = call i32 (i8*, ...) @"printf"(i8* %".445", i8* %".444")
   %"y" = alloca double
@@ -708,7 +714,7 @@ for.exit.2:
   %"y.1" = load double, double* %"y"
   %".450" = bitcast [4 x i8]* @"fmt_float" to i8*
   %".451" = call i32 (i8*, ...) @"printf"(i8* %".450", double %"y.1")
-  %".452" = bitcast [24 x i8]* @"str.-6310221424891199156" to i8*
+  %".452" = bitcast [24 x i8]* @"str.-4497683347654341026" to i8*
   %".453" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".454" = call i32 (i8*, ...) @"printf"(i8* %".453", i8* %".452")
   %".455" = add i32 7, 2
@@ -781,12 +787,12 @@ for.exit.2:
   %".518" = icmp sgt i32 %"x.6", 15
   br i1 %".518", label %"then", label %"else"
 then:
-  %".520" = bitcast [7 x i8]* @"str.-8581112520198590757" to i8*
+  %".520" = bitcast [7 x i8]* @"str.-2135924937038431123" to i8*
   %".521" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".522" = call i32 (i8*, ...) @"printf"(i8* %".521", i8* %".520")
   br label %"ifcont"
 else:
-  %".524" = bitcast [11 x i8]* @"str.-3689024118436506242" to i8*
+  %".524" = bitcast [11 x i8]* @"str.-2842184187731815894" to i8*
   %".525" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".526" = call i32 (i8*, ...) @"printf"(i8* %".525", i8* %".524")
   br label %"ifcont"
@@ -1119,19 +1125,19 @@ for.exit.3:
   ret i32 0
 }
 
-@"str.9043851232501393598" = internal constant [21 x i8] c"aaaaaaaaaaaaaaaaaaaa\00"
+@"str.4872056056157938008" = internal constant [21 x i8] c"aaaaaaaaaaaaaaaaaaaa\00"
 @"fmt_string" = internal constant [4 x i8] c"%s\0a\00"
 declare double @"llvm.pow.f64"(double %".1", double %".2")
 
 @"fmt_float" = internal constant [4 x i8] c"%f\0a\00"
 @"fmt_int" = internal constant [4 x i8] c"%d\0a\00"
-@"str.-558925923256452233" = internal constant [12 x i8] c"Hola muando\00"
-@"str.-1885033220538333473" = internal constant [5 x i8] c"HOLA\00"
-@"str.3624716936794051486" = internal constant [4 x i8] c"Bry\00"
-@"str.-291738176495125186" = internal constant [11 x i8] c"La suma es\00"
-@"str.-4532116965998049198" = internal constant [73 x i8] c"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\00"
-@"str.-3630281701490530344" = internal constant [19 x i8] c"pruebaaaaaaaaaaaas\00"
-@"str.5795652382185968157" = internal constant [2 x i8] c" \00"
-@"str.-6310221424891199156" = internal constant [24 x i8] c"operaciones matematicas\00"
-@"str.-8581112520198590757" = internal constant [7 x i8] c"x > 15\00"
-@"str.-3689024118436506242" = internal constant [11 x i8] c"x es <= 15\00"
+@"str.5192677022118876718" = internal constant [12 x i8] c"Hola muando\00"
+@"str.430847042101993405" = internal constant [5 x i8] c"HOLA\00"
+@"str.-4278983444431560600" = internal constant [4 x i8] c"Bry\00"
+@"str.-8002891238796560256" = internal constant [11 x i8] c"La suma es\00"
+@"str.-5829457613633069353" = internal constant [73 x i8] c"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\00"
+@"str.909977619926745658" = internal constant [19 x i8] c"pruebaaaaaaaaaaaas\00"
+@"str.-8375339648621677614" = internal constant [2 x i8] c" \00"
+@"str.-4497683347654341026" = internal constant [24 x i8] c"operaciones matematicas\00"
+@"str.-2135924937038431123" = internal constant [7 x i8] c"x > 15\00"
+@"str.-2842184187731815894" = internal constant [11 x i8] c"x es <= 15\00"

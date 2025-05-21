@@ -4,6 +4,12 @@ target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
+declare i8* @"strcpy"(i8* %".1", i8* %".2")
+
+declare i8* @"strcat"(i8* %".1", i8* %".2")
+
+declare i32 @"sprintf"(i8* %".1", i8* %".2", ...)
+
 define i32 @"funcion"()
 {
 entry:

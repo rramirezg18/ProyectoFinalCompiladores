@@ -1,9 +1,13 @@
 program {
     main() {
-        print(concatenar("Hola, ", "mundo!"));
-    }
+    
+    string nombre = "Luis";
+    print(nombre);
 
-    string concatenar(string a, string b) {
-        return a + b;
+    print("nombre:" + nombre);
+
+    print("EDad " + 21);
+
+
     }
 }

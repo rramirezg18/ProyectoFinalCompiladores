@@ -23,6 +23,24 @@ class IRgenerador:
         printf_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty], var_arg=True)
         ir.Function(self.module, printf_ty, name="printf")
 
+        strcpy_ty = ir.FunctionType(ir.IntType(8).as_pointer(), 
+                              [ir.IntType(8).as_pointer(), 
+                               ir.IntType(8).as_pointer()])
+        ir.Function(self.module, strcpy_ty, name="strcpy")
+        
+        strcat_ty = ir.FunctionType(ir.IntType(8).as_pointer(), 
+                                [ir.IntType(8).as_pointer(), 
+                                ir.IntType(8).as_pointer()])
+        ir.Function(self.module, strcat_ty, name="strcat")
+
+        sprintf_ty = ir.FunctionType(
+            ir.IntType(32),  # Tipo de retorno (int)
+            [ir.IntType(8).as_pointer(),  # buffer
+            ir.IntType(8).as_pointer()], # formato
+            var_arg=True
+        )
+        ir.Function(self.module, sprintf_ty, name="sprintf")
+
     def generar(self):
         for func in self.ast.functions:
             self.registrar_prototipo_funcion(func)
@@ -298,12 +316,65 @@ class IRgenerador:
             left_val, left_type = self.expr(expr.left)
             right_val, right_type = self.expr(expr.right)
             op = expr.op
+
+            # ==============================================
+            # Manejo de concatenación con conversión automática
+            # ==============================================
+            if op == '+':
+                # Si al menos un operando es string
+                if left_type == 'string' or right_type == 'string':
+                    # Función para convertir tipos no-string a string
+                    def convert_to_str(val, val_type):
+                        if val_type == 'string':
+                            return val
+                        
+                        # Crear buffer temporal (32 bytes para números/booleanos)
+                        buffer = self.builder.alloca(ir.ArrayType(ir.IntType(8), 32), name="strconv_buf")
+                        buffer_ptr = self.builder.bitcast(buffer, ir.IntType(8).as_pointer())
+                        
+                        # Seleccionar formato según tipo
+                        if val_type == 'int':
+                            fmt = self.get_or_create_global_string("%d\0")
+                            val = self.builder.sext(val, ir.IntType(32)) if val.type.width < 32 else val
+                        elif val_type == 'float':
+                            fmt = self.get_or_create_global_string("%f\0")
+                        elif val_type == 'boolean':
+                            fmt = self.get_or_create_global_string("%s\0")
+                            val = self.builder.select(val, 
+                                self.get_or_create_global_string("true"),
+                                self.get_or_create_global_string("false")
+                            )
+                        
+                        # Llamar a sprintf
+                        fmt_ptr = self.builder.bitcast(fmt, ir.IntType(8).as_pointer())
+                        self.builder.call(self.module.globals["sprintf"], [buffer_ptr, fmt_ptr, val])
+                        return buffer_ptr
+
+                    # Convertir operandos si es necesario
+                    if left_type != 'string':
+                        left_val = convert_to_str(left_val, left_type)
+                    if right_type != 'string':
+                        right_val = convert_to_str(right_val, right_type)
+
+                    # Concatenar strings
+                    strcpy = self.module.globals["strcpy"]
+                    strcat = self.module.globals["strcat"]
+                    buffer = self.builder.alloca(ir.ArrayType(ir.IntType(8), 256), name="concat_buf")
+                    dest = self.builder.bitcast(buffer, ir.IntType(8).as_pointer())
+                    self.builder.call(strcpy, [dest, left_val])
+                    self.builder.call(strcat, [dest, right_val])
+                    return (dest, 'string')
+
+            # ==============================================
+            # Resto de operaciones numéricas (código existente)
+            # ==============================================
             if left_type == 'int' and right_type == 'float':
                 left_val = self.builder.sitofp(left_val, ir.DoubleType())
                 left_type = 'float'
             elif left_type == 'float' and right_type == 'int':
                 right_val = self.builder.sitofp(right_val, ir.DoubleType())
                 right_type = 'float'
+
             if op in ['+', '-', '*', '/', '%']:
                 if op == '/':
                     if left_type == 'int':
@@ -395,6 +466,7 @@ class IRgenerador:
         self.builder = ir.IRBuilder(entry_block)
         self.locals = {}
         
+        
         # Registrar parámetros
         for i, (param_type, param_name) in enumerate(func.params):
             alloc = self.builder.alloca(self.type_map[param_type], name=param_name)
@@ -410,5 +482,24 @@ class IRgenerador:
             if func.ret_type == 'void':
                 self.builder.ret_void()
             else:
-                default_value = ir.Constant(self.type_map[func.ret_type], 0)
-                self.builder.ret(default_value)
+                # NUEVO: Validar tipo de retorno
+                if func.ret_type == 'string':
+                    null_str = ir.Constant(ir.IntType(8).as_pointer(), None)
+                    self.builder.ret(null_str)
+                else:
+                    # Generar constante cero del tipo correcto
+                    zero = ir.Constant(self.type_map[func.ret_type], 0)
+                    self.builder.ret(zero)
+
+
+    def get_or_create_global_string(self, s: str):
+        name = f"fmt_{hash(s)}"
+        if name in self.module.globals:
+            return self.module.globals[name]
+        
+        fmt_type = ir.ArrayType(ir.IntType(8), len(s))
+        fmt_global = ir.GlobalVariable(self.module, fmt_type, name=name)
+        fmt_global.linkage = "internal"
+        fmt_global.global_constant = True
+        fmt_global.initializer = ir.Constant(fmt_type, bytearray(s.encode("utf8")))
+        return fmt_global

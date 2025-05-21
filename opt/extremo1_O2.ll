@@ -2,18 +2,18 @@
 source_filename = "<string>"
 target triple = "x86_64-pc-linux-gnu"
 
-@str.9043851232501393598 = internal constant [21 x i8] c"aaaaaaaaaaaaaaaaaaaa\00"
+@str.4872056056157938008 = internal constant [21 x i8] c"aaaaaaaaaaaaaaaaaaaa\00"
 @fmt_float = internal constant [4 x i8] c"%f\0A\00"
 @fmt_int = internal constant [4 x i8] c"%d\0A\00"
-@str.-558925923256452233 = internal constant [12 x i8] c"Hola muando\00"
-@str.-1885033220538333473 = internal constant [5 x i8] c"HOLA\00"
-@str.3624716936794051486 = internal constant [4 x i8] c"Bry\00"
-@str.-291738176495125186 = internal constant [11 x i8] c"La suma es\00"
-@str.-4532116965998049198 = internal constant [73 x i8] c"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\00"
-@str.-3630281701490530344 = internal constant [19 x i8] c"pruebaaaaaaaaaaaas\00"
-@str.5795652382185968157 = internal constant [2 x i8] c" \00"
-@str.-6310221424891199156 = internal constant [24 x i8] c"operaciones matematicas\00"
-@str.-3689024118436506242 = internal constant [11 x i8] c"x es <= 15\00"
+@str.5192677022118876718 = internal constant [12 x i8] c"Hola muando\00"
+@str.430847042101993405 = internal constant [5 x i8] c"HOLA\00"
+@str.-4278983444431560600 = internal constant [4 x i8] c"Bry\00"
+@str.-8002891238796560256 = internal constant [11 x i8] c"La suma es\00"
+@str.-5829457613633069353 = internal constant [73 x i8] c"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\00"
+@str.909977619926745658 = internal constant [19 x i8] c"pruebaaaaaaaaaaaas\00"
+@str.-8375339648621677614 = internal constant [2 x i8] c" \00"
+@str.-4497683347654341026 = internal constant [24 x i8] c"operaciones matematicas\00"
+@str.-2842184187731815894 = internal constant [11 x i8] c"x es <= 15\00"
 
 ; Function Attrs: nofree nounwind
 declare noundef i32 @printf(i8* nocapture noundef readonly, ...) local_unnamed_addr #0
@@ -131,7 +131,7 @@ ifcont.1:                                         ; preds = %tailrecurse
 ; Function Attrs: nofree
 define i32 @main() local_unnamed_addr #5 {
 entry:
-  %puts = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([21 x i8], [21 x i8]* @str.9043851232501393598, i64 0, i64 0))
+  %puts = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([21 x i8], [21 x i8]* @str.4872056056157938008, i64 0, i64 0))
   %.11 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x519249AD2594C37D)
   %.16 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x519249AD2594C37D)
   %.21 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x5E35F7F689C43051)
@@ -165,22 +165,22 @@ for.exit:                                         ; preds = %for.body
   %.137 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 2.000000e+01)
   %.157 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double -5.852000e+03)
   %.162 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x467078C6E4F7D754)
-  %puts1 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([12 x i8], [12 x i8]* @str.-558925923256452233, i64 0, i64 0))
+  %puts1 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([12 x i8], [12 x i8]* @str.5192677022118876718, i64 0, i64 0))
   %.176 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x425B0829007D0000)
   %.186 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 6.250500e+04)
   %.188 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 5)
   %.191 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 2)
-  %puts14 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.1 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.2 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.3 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.4 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.5 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.6 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.7 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.8 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.9 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
-  %puts14.10 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.-1885033220538333473, i64 0, i64 0))
+  %puts14 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.1 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.2 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.3 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.4 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.5 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.6 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.7 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.8 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.9 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
+  %puts14.10 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([5 x i8], [5 x i8]* @str.430847042101993405, i64 0, i64 0))
   %ldexp = tail call double @ldexp(double 1.000000e+00, i32 2)
   %.213 = fadd double %ldexp, 0x4140C91A00000000
   %.215 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double %.213)
@@ -256,19 +256,19 @@ for.exit:                                         ; preds = %for.body
   %.412.9 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 9)
   %ldexp13.9 = tail call double @ldexp(double 1.000000e+00, i32 9)
   %.417.9 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double %ldexp13.9)
-  %puts4 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @str.3624716936794051486, i64 0, i64 0))
-  %puts5 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([11 x i8], [11 x i8]* @str.-291738176495125186, i64 0, i64 0))
+  %puts4 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @str.-4278983444431560600, i64 0, i64 0))
+  %puts5 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([11 x i8], [11 x i8]* @str.-8002891238796560256, i64 0, i64 0))
   %.429 = tail call i32 @suma()
-  %puts6 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([73 x i8], [73 x i8]* @str.-4532116965998049198, i64 0, i64 0))
+  %puts6 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([73 x i8], [73 x i8]* @str.-5829457613633069353, i64 0, i64 0))
   %.434 = tail call i32 @doble(i32 10)
   %.437 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 %.434)
-  %puts7 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([19 x i8], [19 x i8]* @str.-3630281701490530344, i64 0, i64 0))
+  %puts7 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([19 x i8], [19 x i8]* @str.909977619926745658, i64 0, i64 0))
   %.441 = tail call i32 @funcionB(i32 5)
   %.443 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 %.441)
-  %puts8 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([2 x i8], [2 x i8]* @str.5795652382185968157, i64 0, i64 0))
+  %puts8 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([2 x i8], [2 x i8]* @str.-8375339648621677614, i64 0, i64 0))
   %.449 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 10)
   %.451 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 2.500000e+01)
-  %puts9 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([24 x i8], [24 x i8]* @str.-6310221424891199156, i64 0, i64 0))
+  %puts9 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([24 x i8], [24 x i8]* @str.-4497683347654341026, i64 0, i64 0))
   %.462 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 5.314500e+05)
   %.471 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 8.000000e+02)
   %.478 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x43B4ADF4B7320335)
@@ -276,7 +276,7 @@ for.exit:                                         ; preds = %for.body
   %.487 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 5.904900e+14)
   %.509 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 2.400000e+01)
   %.517 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x4202A05F20500000)
-  %puts10 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([11 x i8], [11 x i8]* @str.-3689024118436506242, i64 0, i64 0))
+  %puts10 = tail call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([11 x i8], [11 x i8]* @str.-2842184187731815894, i64 0, i64 0))
   %.541 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x41286A6880000000)
   %.548 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 616792064)
   %.555 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_float, i64 0, i64 0), double 0x418F28C280000000)

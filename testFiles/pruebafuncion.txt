@@ -1,9 +1,13 @@
 program{
     main(){
         nombre();
+        int miEdad = 18;
+        print("mi edad es: " + miEdad); 
     }
     
     string nombre(){
         print("hola");
+        print("hola soy messi");
+        print("Soy" + "Cristiano");
     }
 }
