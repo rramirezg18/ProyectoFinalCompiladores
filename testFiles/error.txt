@@ -1,8 +1,6 @@
 miprograma{
     main(){
         int x = "hola";
-        int Y = "hola";
-        int Z = "hola";
         print(x);        
     }
 }

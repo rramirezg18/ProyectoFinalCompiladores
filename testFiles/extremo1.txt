@@ -1,8 +1,264 @@
-program{
+extremo{
     main(){
-        int resultado = fibonacci(30);
+        print("aaaaaaaaaaaaaaaaaaaa");
+        int num4 = 50;
+        int num5 = 50;
+        print(num4^num5);
+        print(50^50);
+        print(88^75);
+        int d = 90;
+        print(num4^num4/2);
+        print(num4^50/2);
+        print(50^num5/20);
+        for(int w = 0; w <= 100; w++){
+            print(num4^w/num5);
+        }
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^555);
+        print(78^2+5);
+        float div = 100/5;
+        print(div);
+
+        print(3*5+2-88+250/2+789*2+56*2+300-7896);
+        print(23^23);
+        int var = 5;
+        string saludo = "Hola muando";
+        print(saludo);
+        float t = 88^6+250*2;
+        print(t);
+        t = t -10;
+        print(var+250^2);
+        print(var);
+        var = 2;
+        print(var);
+        int p = 10;
+        while (p >= 0) {
+            print("HOLA");
+            p = p - 1;
+        }
+
+
+
+        print(2^var+(55*200^2+(58*2)));
+        print(6^6+2);
+        int x = 10;
+        int variable = 10;
+        print(100^variable);
+        print(55^variable+(300));
+        print(variable+300*55);
+
+        print(5-25*(3+5));
+        
+        for(int k = 0; k <= 10; k++){
+            print(5-25*(3+5));
+        }
+
+
+        float z = 5^100;
+        print(z-1);
+
+
+        int resultadoF = fibonacci(50);
+        print(resultadoF);
+
+        int resultadoFF = fibonacci(50);
+        print(resultadoFF);
+
+
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^555);
+        print(78^2+5);
+
+
+        print(2 * 5);
+        print(2 + x * 4);
+        print((2 + 3) * 4);
+        print(10 / 2);
+        print(2 ^ 3);
+        print(2 ^ 3 ^ 2);
+        print(5 + 3 * 2 - 4 / 2);
+        print((3 + 4) * 2 ^ 3 - 10 / 2);
+        print(5 / 2);
+        print(2 + 4 * (-2));
+
+        for(int j = 0; j < 10; j++){
+            print(j);
+            print(2^j);
+        }
+
+
+        string juan = "Bry";
+        print(juan);
+
+        print("La suma es");
+        suma();
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+
+        int a = 10;
+        int b = doble(a);
+        print(b);
+
+
+        print("pruebaaaaaaaaaaaas");
+        print(funcionB(5));
+        print(" ");
+        
+        float y = 25.0;
+        print(x);
+        print(y);
+        print("operaciones matematicas");
+        print(7+2+3^12);
+        print((2^5*(5^2)));
+        print(5*5^25);
+        print(2*23-23);
+        print(30^x);
+        print(2*2*2/2+2*2+2*2+2*2+2*2+2*2);
+        print(x^x+(2*5));
+        if(x > 15){
+            print("x > 15");
+        } else {
+            print("x es <= 15");
+        }
+        
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^555);
+        print(78^2+5);
+
+
+
+        while(x > 0){
+            print(x);
+            x = x - 1; 
+        }
+
+        for(int i = 0; i <= 100; i++){
+            print(i);
+        }
+        
+    
+        
+        contarHasta(5);
+
+        print(potencia(2, 3));
+
+        print(sumar(5, 7));
+
+        int resultado = sumaHasta(5);
+        print(resultado);
+
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^555);
+        print(78^2+5);
+
+        print(2 * 5);
+        print(2 + x * 4);
+        print((2 + 3) * 4);
+        print(10 / 2);
+        print(2 ^ 3);
+        print(2 ^ 3 ^ 2);
+        print(5 + 3 * 2 - 4 / 2);
+        print((3 + 4) * 2 ^ 3 - 10 / 2);
+        print(5 / 2);
+        print(2 + 4 * (-2));
+
+
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^555);
+        print(78^2+5);
+
+    }
+
+    int potencia(int base, int exponente) {
+        return base ^ exponente;
+    }
+
+    int sumar(int a, int b) {
+        return a + b;
+    }
+
+
+    int sumaHasta(int n) {
+        int suma = 0;
+        int contador = 1;
+        while (contador < n) {
+            suma = suma + contador;
+            contador = contador + 1;//imprime 10 como resultado
+        }
+        return suma;
+    }
+
+    int contarHasta(int n) {
+        int i = 0;
+        for (i = 1; i <= n; i++) {
+            print(i);
+        }
+        return 0;
+    }
+
+    int funcionA(int n){
+        return n * 2;
+    }
+    
+    int funcionB(int x){
+        int temp = funcionA(x);
+        return temp * 3;
+    }
+
+
+    int doble(int a){
+        return a * 2;
+    }
+
+    int suma(){
+        int num1 = 10;
+        int num2 = 20;
+        int num3 = 30;
+        int resultado = num1 + num2 + num3;
         print(resultado);
     }
+
+
+
 
     int fibonacci(int n){
         if(n == 0){
@@ -13,4 +269,10 @@ program{
         }
         return fibonacci(n-1) + fibonacci(n-2);
     }
+
+
+
+
 }
+
+

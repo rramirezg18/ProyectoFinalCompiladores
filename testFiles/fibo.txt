@@ -1,0 +1,31 @@
+program{
+    main() {
+  int resultado = fibonacci(30);
+  print(resultado);
+}
+
+int fibonacci(int n) {
+  if (n == 0) {
+    print(0);
+    return 0;
+  } else if (n == 1) {
+    print(0);
+    print(1);
+    return 1;
+  }
+  
+  int a = 0;
+  int b = 1;
+  print(a);  // Imprime Fib(0)
+  print(b);  // Imprime Fib(1)
+  
+  for (int i = 2; i <= n; i++) {
+    int c = a + b;
+    print(c);  // Imprime Fib(i)
+    a = b;
+    b = c;
+  }
+  
+  return b;
+}
+}

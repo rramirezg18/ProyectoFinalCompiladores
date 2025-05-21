@@ -139,23 +139,54 @@ class IRgenerador:
 
 
     def sentencia_if(self, if_node: If):
+        # Procesar condición principal
         cond_val, cond_type = self.expr(if_node.cond)
         if cond_type == 'int':
             cond_val = self.builder.icmp_signed('!=', cond_val, ir.Constant(ir.IntType(32), 0))
+        
         func = self.builder.function
         then_bb = func.append_basic_block(name="then")
-        else_bb = func.append_basic_block(name="else")
+        current_else_bb = func.append_basic_block(name="else")
         merge_bb = func.append_basic_block(name="ifcont")
-        self.builder.cbranch(cond_val, then_bb, else_bb)
+        
+        # Manejar elifs
+        elif_blocks = []
+        for elif_cond, elif_block in if_node.elif_blocks:
+            elif_bb = func.append_basic_block(name="elif")
+            elif_blocks.append((elif_cond, elif_block, elif_bb))
+        
+        # Branch inicial
+        self.builder.cbranch(cond_val, then_bb, elif_blocks[0][2] if elif_blocks else current_else_bb)
+
+        # Bloque THEN
         self.builder.position_at_start(then_bb)
         self.bloque(if_node.then_block)
         if not self.builder.block.is_terminated:
             self.builder.branch(merge_bb)
-        self.builder.position_at_start(else_bb)
+        
+        # Procesar ELIFs
+        for i, (elif_cond, elif_block, elif_bb) in enumerate(elif_blocks):
+            next_bb = elif_blocks[i+1][2] if i+1 < len(elif_blocks) else current_else_bb
+            
+            self.builder.position_at_start(elif_bb)
+            elif_cond_val, _ = self.expr(elif_cond)
+            elif_then_bb = func.append_basic_block(name=f"elif_then_{i}")
+            self.builder.cbranch(elif_cond_val, elif_then_bb, next_bb)
+            
+            self.builder.position_at_start(elif_then_bb)
+            self.bloque(elif_block)
+            if not self.builder.block.is_terminated:
+                self.builder.branch(merge_bb)
+            
+            elif_bb = next_bb
+
+        # Bloque ELSE final
+        self.builder.position_at_start(current_else_bb)
         if if_node.else_block:
             self.bloque(if_node.else_block)
         if not self.builder.block.is_terminated:
             self.builder.branch(merge_bb)
+        
         self.builder.position_at_start(merge_bb)
 
     def sentecia_while(self, while_node: While):
@@ -363,14 +394,21 @@ class IRgenerador:
         entry_block = function.append_basic_block(name="entry")
         self.builder = ir.IRBuilder(entry_block)
         self.locals = {}
-        for i, (_, param_name) in enumerate(func.params):
-            alloc = self.builder.alloca(function.args[i].type, name=param_name)
+        
+        # Registrar parámetros
+        for i, (param_type, param_name) in enumerate(func.params):
+            alloc = self.builder.alloca(self.type_map[param_type], name=param_name)
             self.builder.store(function.args[i], alloc)
-            self.locals[param_name] = (alloc, func.params[i][0])
+            self.locals[param_name] = (alloc, param_type)
+        
+        # Procesar instrucciones (EXCLUYENDO el return_expr)
         for instr in func.instructions:
             self.instruccion(instr)
+        
+        # Manejar retorno por defecto
         if not self.builder.block.is_terminated:
             if func.ret_type == 'void':
                 self.builder.ret_void()
             else:
-                self.builder.ret(ir.Constant(self.type_map[func.ret_type], 0))
+                default_value = ir.Constant(self.type_map[func.ret_type], 0)
+                self.builder.ret(default_value)

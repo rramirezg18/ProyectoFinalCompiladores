@@ -13,7 +13,7 @@ entry:
   br label %for.body
 
 for.body:                                         ; preds = %entry, %for.body
-  %i.01 = phi i32 [ 10000000, %entry ], [ %.9, %for.body ]
+  %i.01 = phi i32 [ 1000000, %entry ], [ %.9, %for.body ]
   %.7 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([4 x i8], [4 x i8]* @fmt_int, i64 0, i64 0), i32 %i.01)
   %.9 = add nsw i32 %i.01, -1
   %.4.not = icmp eq i32 %i.01, 0

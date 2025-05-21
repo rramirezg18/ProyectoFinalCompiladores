@@ -1,0 +1,14 @@
+program{
+    main(){
+        int x = 5;
+        int y = 7;
+
+        if(x < y){
+            print("Si");
+        }else if(x > y){
+            print("No");
+        }else{
+            print("Son iguales");
+        }
+    }
+}

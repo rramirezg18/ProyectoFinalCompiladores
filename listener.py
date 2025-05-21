@@ -20,46 +20,63 @@ class AnalizadorSemantico(GramaticaListener):
     def _error(self, msg, ctx):
         raise Exception(f"Línea {self._get_line(ctx)}: {msg}")
 
-    def enterGramatica(self, ctx:GramaticaParser.GramaticaContext):
+    def enterGramatica(self, ctx: GramaticaParser.GramaticaContext):
         for func_ctx in ctx.funcion():
             nombre = func_ctx.VARIABLE().getText()
             tipo_retorno = func_ctx.tipo().getText() if func_ctx.tipo() else "void"
             parametros = []
             if func_ctx.parametros():
-                tipos = func_ctx.parametros().tipo()
-                nombres = func_ctx.parametros().VARIABLE()
-                for tipo, nombre_var in zip(tipos, nombres):
-                    parametros.append((tipo.getText(), nombre_var.getText()))
-            self.tabla.agregar_funcion(nombre, tipo_retorno, parametros) 
+                for tipo, var in zip(func_ctx.parametros().tipo(), func_ctx.parametros().VARIABLE()):
+                    parametros.append((tipo.getText(), var.getText()))
+            linea = func_ctx.start.line
+            self.tabla.agregar_funcion(nombre, tipo_retorno, parametros, linea)  # Ahora los parámetros están definidos
 
     def enterMain(self, ctx:GramaticaParser.MainContext):
         self.tabla.push_env()
 
-    def exitMain(self, ctx:GramaticaParser.MainContext):
-        self.tabla.pop_env()
+    def exitMain(self, ctx: GramaticaParser.MainContext):
+        self._exit_scope(ctx)
 
     def enterBloque(self, ctx:GramaticaParser.BloqueContext):
         self.tabla.push_env() 
 
-    def exitBloque(self, ctx:GramaticaParser.BloqueContext):
-        self.tabla.pop_env() 
+    def exitBloque(self, ctx: GramaticaParser.BloqueContext):
+        self._exit_scope(ctx)
 
+    # En listener.py
     def exitDeclaracion_y_asignacion(self, ctx):
         var_name = ctx.VARIABLE().getText()
-        expr_tipo = self.inferir_tipo_expr(ctx.expr())
+        expr_tipo = self.inferir_tipo_expr(ctx.expr())  # Obtener tipo de la expresión
         
         if ctx.tipo():
             tipo_decl = ctx.tipo().getText()
-            if not self.tabla.tipos_compatibles(tipo_decl, expr_tipo):  
+            linea = ctx.start.line
+            # Verificar compatibilidad antes de agregar la variable
+            if not self.tabla.tipos_compatibles(tipo_decl, expr_tipo):
                 self._error(
                     f"No se puede asignar '{expr_tipo}' a '{var_name}' de tipo '{tipo_decl}'", 
-                    ctx
+                    ctx.expr()  # <- Usar el contexto de la expresión para el error
                 )
-            # Añadir la variable a var_declared aunque esté en un entorno interno
-            self.tabla.agregar_variable(var_name, tipo_decl)
+            self.tabla.agregar_variable(var_name, tipo_decl, linea)
         else:
             if not self.tabla.existe_variable(var_name):
                 self._error(f"Variable '{var_name}' no declarada", ctx)
+    
+
+    def _exit_scope(self, ctx):
+        current_depth = len(self.tabla.entornos) - 1
+        current_env = self.tabla.entornos[-1]
+        self.tabla.pop_env()
+
+        # Verificar variables no usadas con su línea correcta
+        for var_name in current_env:
+            key = (var_name, current_depth)
+            if key not in self.tabla.var_used:
+                linea = self.tabla.var_declared.get(key, "desconocida")
+                self.warnings.append(
+                    f"Línea {linea}: [WARNING] Variable '{var_name}' declarada pero no utilizada"
+                )
+
 
     def exitExpr(self, ctx: GramaticaParser.ExprContext):
         if ctx.getChildCount() == 1:
@@ -107,16 +124,18 @@ class AnalizadorSemantico(GramaticaListener):
         
         return func_info['tipo_retorno']
 
-    def enterFuncion(self, ctx:GramaticaParser.FuncionContext):
+    def enterFuncion(self, ctx: GramaticaParser.FuncionContext):
         nombre = ctx.VARIABLE().getText()
         tipo_retorno = ctx.tipo().getText() if ctx.tipo() else "void"
         self.tabla.push_env()
         if ctx.parametros():
-            for tipo, var in zip(ctx.parametros().tipo(), ctx.parametros().VARIABLE()): 
-                self.tabla.agregar_variable(var.getText(), tipo.getText())
+            # Agregar parámetros con su línea correspondiente
+            for tipo, var in zip(ctx.parametros().tipo(), ctx.parametros().VARIABLE()):
+                linea_var = var.symbol.line  # Obtener línea del token VARIABLE
+                self.tabla.agregar_variable(var.getText(), tipo.getText(), linea_var)  # <--- Agregar línea
 
-    def exitFuncion(self, ctx:GramaticaParser.FuncionContext):
-        self.tabla.pop_env()
+    def exitFuncion(self, ctx: GramaticaParser.FuncionContext):
+        self._exit_scope(ctx)
 
     def tipo_expresiones(self, ctx):
         from GramaticaParser import GramaticaParser  # para acceder a las clases de contexto
@@ -131,7 +150,8 @@ class AnalizadorSemantico(GramaticaListener):
             elif ctx.BOOLEANO() is not None:
                 return 'boolean'
             elif ctx.VARIABLE() is not None:
-                return self.tabla.consultar_variable(ctx.VARIABLE().getText())
+                tipo_var, depth = self.tabla.consultar_variable(ctx.VARIABLE().getText())
+                return tipo_var 
             elif ctx.llamada_funcion() is not None:
                 return self.validar_llamada_funcion(ctx.llamada_funcion())
             # Caso: paréntesis, e.g. ( expr )
@@ -208,26 +228,30 @@ class AnalizadorSemantico(GramaticaListener):
     def exitAtom(self, ctx: GramaticaParser.AtomContext):
         if ctx.VARIABLE():
             var_name = ctx.VARIABLE().getText()
-            self.tabla.usar_variable(var_name)  # <--- Registrar uso
-            if not self.tabla.existe_variable(var_name):
-                self._error(f"Variable '{var_name}' no declarada", ctx)
+            try:
+                tipo_var, depth = self.tabla.consultar_variable(var_name)  # Obtenemos profundidad
+                self.tabla.usar_variable(var_name, depth)  # <- Usamos profundidad
+            except Exception as e:
+                self._error(str(e), ctx)
 
     
     def exitGramatica(self, ctx: GramaticaParser.GramaticaContext):
-    # Considerar main() como siempre usada
-        if 'main' in self.tabla.func_declared:
-            self.tabla.usar_funcion('main')
-        
-        # Variables no usadas
-        unused_vars = self.tabla.var_declared - self.tabla.var_used
-        for var in unused_vars:
-            self._warning(f"Variable '{var}' declarada pero no utilizada", ctx)
-        
-        # Funciones no usadas (excepto main)
+        # Verificar variables globales (omitir 'true' y 'false')
+        global_env = self.tabla.entornos[0]
+        for var_name in global_env:
+            if var_name in ['true', 'false']:
+                continue  # Ignorar predefinidos
+            key = (var_name, 0)
+            if key not in self.tabla.var_used:
+                linea = self.tabla.var_declared.get(key, "desconocida")
+                self.warnings.append(f"Línea {linea}: [WARNING] Variable '{var_name}' declarada pero no utilizada")
+
+        # Verificar funciones no usadas (excepto main)
         unused_funcs = self.tabla.func_declared - self.tabla.func_used
         for func in unused_funcs:
-            if func != 'main':  # Excluir main de los warnings
-                self._warning(f"Función '{func}' declarada pero no invocada", ctx)
+            if func != 'main':
+                linea = self.tabla.funciones[func]['linea']
+                self.warnings.append(f"Línea {linea}: [WARNING] Función '{func}' declarada pero no invocada")
     
     def enterLlamada_funcion(self, ctx: GramaticaParser.Llamada_funcionContext):
         nombre_funcion = ctx.VARIABLE().getText()

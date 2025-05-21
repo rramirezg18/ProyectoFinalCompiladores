@@ -153,16 +153,16 @@ entry:
   %"variable" = alloca i32
   store i32 10, i32* %"variable"
   %"juan" = alloca i8*
-  %".3" = bitcast [4 x i8]* @"str.3480598088071542652" to i8*
+  %".3" = bitcast [4 x i8]* @"str.3624716936794051486" to i8*
   store i8* %".3", i8** %"juan"
   %"juan.1" = load i8*, i8** %"juan"
   %".5" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i8* %"juan.1")
-  %".7" = bitcast [11 x i8]* @"str.2542657226198446909" to i8*
+  %".7" = bitcast [11 x i8]* @"str.-291738176495125186" to i8*
   %".8" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".8", i8* %".7")
   %".10" = call i32 @"suma"()
-  %".11" = bitcast [73 x i8]* @"str.-2778122627740968259" to i8*
+  %".11" = bitcast [73 x i8]* @"str.-4532116965998049198" to i8*
   %".12" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".13" = call i32 (i8*, ...) @"printf"(i8* %".12", i8* %".11")
   %"a" = alloca i32
@@ -174,13 +174,13 @@ entry:
   %"b.1" = load i32, i32* %"b"
   %".17" = bitcast [4 x i8]* @"fmt_int" to i8*
   %".18" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"b.1")
-  %".19" = bitcast [19 x i8]* @"str.-1862264514934050996" to i8*
+  %".19" = bitcast [19 x i8]* @"str.-3630281701490530344" to i8*
   %".20" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".21" = call i32 (i8*, ...) @"printf"(i8* %".20", i8* %".19")
   %".22" = call i32 @"funcionB"(i32 5)
   %".23" = bitcast [4 x i8]* @"fmt_int" to i8*
   %".24" = call i32 (i8*, ...) @"printf"(i8* %".23", i32 %".22")
-  %".25" = bitcast [2 x i8]* @"str.-3621136315230116981" to i8*
+  %".25" = bitcast [2 x i8]* @"str.5795652382185968157" to i8*
   %".26" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".27" = call i32 (i8*, ...) @"printf"(i8* %".26", i8* %".25")
   %"x" = alloca i32
@@ -193,7 +193,7 @@ entry:
   %"y.1" = load double, double* %"y"
   %".32" = bitcast [4 x i8]* @"fmt_float" to i8*
   %".33" = call i32 (i8*, ...) @"printf"(i8* %".32", double %"y.1")
-  %".34" = bitcast [24 x i8]* @"str.761549330711985089" to i8*
+  %".34" = bitcast [24 x i8]* @"str.-6310221424891199156" to i8*
   %".35" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".36" = call i32 (i8*, ...) @"printf"(i8* %".35", i8* %".34")
   %".37" = add i32 7, 2
@@ -1879,12 +1879,12 @@ entry:
   %".1716" = icmp sgt i32 %"x.2", 15
   br i1 %".1716", label %"then", label %"else"
 then:
-  %".1718" = bitcast [7 x i8]* @"str.5212653003492404439" to i8*
+  %".1718" = bitcast [7 x i8]* @"str.-8581112520198590757" to i8*
   %".1719" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".1720" = call i32 (i8*, ...) @"printf"(i8* %".1719", i8* %".1718")
   br label %"ifcont"
 else:
-  %".1722" = bitcast [11 x i8]* @"str.4523718507449431432" to i8*
+  %".1722" = bitcast [11 x i8]* @"str.-3689024118436506242" to i8*
   %".1723" = bitcast [4 x i8]* @"fmt_string" to i8*
   %".1724" = call i32 (i8*, ...) @"printf"(i8* %".1723", i8* %".1722")
   br label %"ifcont"
@@ -1998,16 +1998,16 @@ for.exit:
   ret i32 0
 }
 
-@"str.3480598088071542652" = internal constant [4 x i8] c"Bry\00"
+@"str.3624716936794051486" = internal constant [4 x i8] c"Bry\00"
 @"fmt_string" = internal constant [4 x i8] c"%s\0a\00"
-@"str.2542657226198446909" = internal constant [11 x i8] c"La suma es\00"
-@"str.-2778122627740968259" = internal constant [73 x i8] c"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\00"
+@"str.-291738176495125186" = internal constant [11 x i8] c"La suma es\00"
+@"str.-4532116965998049198" = internal constant [73 x i8] c"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\00"
 @"fmt_int" = internal constant [4 x i8] c"%d\0a\00"
-@"str.-1862264514934050996" = internal constant [19 x i8] c"pruebaaaaaaaaaaaas\00"
-@"str.-3621136315230116981" = internal constant [2 x i8] c" \00"
+@"str.-3630281701490530344" = internal constant [19 x i8] c"pruebaaaaaaaaaaaas\00"
+@"str.5795652382185968157" = internal constant [2 x i8] c" \00"
 @"fmt_float" = internal constant [4 x i8] c"%f\0a\00"
-@"str.761549330711985089" = internal constant [24 x i8] c"operaciones matematicas\00"
+@"str.-6310221424891199156" = internal constant [24 x i8] c"operaciones matematicas\00"
 declare double @"llvm.pow.f64"(double %".1", double %".2")
 
-@"str.5212653003492404439" = internal constant [7 x i8] c"x > 15\00"
-@"str.4523718507449431432" = internal constant [11 x i8] c"x es <= 15\00"
+@"str.-8581112520198590757" = internal constant [7 x i8] c"x > 15\00"
+@"str.-3689024118436506242" = internal constant [11 x i8] c"x es <= 15\00"

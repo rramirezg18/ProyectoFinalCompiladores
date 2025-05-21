@@ -8,7 +8,7 @@ define i32 @"main"()
 {
 entry:
   %"i" = alloca i32
-  store i32 10000000, i32* %"i"
+  store i32 1000000, i32* %"i"
   br label %"for.cond"
 for.cond:
   %"i.1" = load i32, i32* %"i"
