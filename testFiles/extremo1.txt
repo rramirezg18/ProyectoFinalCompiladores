@@ -66,10 +66,10 @@ extremo{
         print(z-1);
 
 
-        int resultadoF = fibonacci(50);
+        int resultadoF = fibonacci(40);
         print(resultadoF);
 
-        int resultadoFF = fibonacci(50);
+        int resultadoFF = fibonacci(40);
         print(resultadoFF);
 
 

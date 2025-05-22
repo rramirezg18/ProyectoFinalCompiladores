@@ -36,7 +36,7 @@ class Timer:
 
 class MiErrorListener(ErrorListener):
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        raise Exception(f"Error sintáctico en línea {line}:{column} - {msg}")
+        raise Exception(f"Error en línea {line}:{column} - {msg}")
 
 def mostrar_menu_principal():
     print("\n Menú Del Compilador ")
@@ -90,7 +90,7 @@ def seleccionar_archivo_ll():
 
 def convertir_a_exe():
     try:
-        # Versión original sin phase_times
+      
         #with Timer("Verificación de dependencias"):
          #   subprocess.run(["x86_64-w64-mingw32-gcc", "--version"], 
           #                stdout=subprocess.DEVNULL, 
@@ -258,7 +258,7 @@ def compilar(optimizar=False, solo_ir=False):
                 print(f"✓ IR optimizado generado: {archivo_opt}")
                 archivo_ll = archivo_opt
 
-        # 8. Compilación y ejecución automáticas (comentario preservado)
+        # 8. Compilación y ejecución automáticas 
         with Timer("Compilación a binario", phase_times):
             subprocess.run(["clang", "-o", nombre_base, archivo_ll, "-lm"])
             print(f"✓ Ejecutable generado: ./{nombre_base}")
@@ -274,7 +274,7 @@ def compilar(optimizar=False, solo_ir=False):
             if resultado.stderr:
                 print(resultado.stderr)
 
-        # Mostrar tiempos por fase (comentarios preservados)
+        # Mostrar tiempos por fase 
         print("\nTiempos por fase:")
         for phase_name, elapsed in phase_times:
             td = timedelta(seconds=elapsed)
@@ -283,7 +283,7 @@ def compilar(optimizar=False, solo_ir=False):
             seconds = td.seconds % 60
             microseconds = td.microseconds
             time_str = f"{hours}:{minutes:02}:{seconds:02}:{microseconds:06d}"
-            time_str = time_str[:-2]  # Quitar los últimos dos dígitos para 4 decimales
+            time_str = time_str[:-2]  # Quita los últimos dos dígitos para 4 decimales
             print(f"{phase_name.ljust(25)} {time_str}")
 
         total_elapsed = timedelta(seconds=time.monotonic() - total_start)

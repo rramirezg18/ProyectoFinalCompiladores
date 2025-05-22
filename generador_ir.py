@@ -17,6 +17,7 @@ class IRgenerador:
             'string': ir.IntType(8).as_pointer(),
         }
         self.declarar_funciones()
+        
 
     def declarar_funciones(self):
         voidptr_ty = ir.IntType(8).as_pointer()
@@ -126,7 +127,7 @@ class IRgenerador:
         elif value_type == 'string':
             fmt = "%s\n\0"
         elif value_type == 'boolean':
-            # --- aquí extendemos el i1 a i32 para printf ---
+            # aquí extendemos el i1 a i32 para printf ---
             value = self.builder.zext(value, ir.IntType(32))
             fmt = "%d\n\0"
         else:
@@ -310,16 +311,13 @@ class IRgenerador:
                 loaded = self.builder.load(alloc, name=expr.name)
                 return (loaded, var_type)
 
-        # Resto: BinaryOp, UnaryOp, FuncCall...
 
         elif isinstance(expr, BinaryOp):
             left_val, left_type = self.expr(expr.left)
             right_val, right_type = self.expr(expr.right)
             op = expr.op
 
-            # ==============================================
             # Manejo de concatenación con conversión automática
-            # ==============================================
             if op == '+':
                 # Si al menos un operando es string
                 if left_type == 'string' or right_type == 'string':
@@ -365,9 +363,6 @@ class IRgenerador:
                     self.builder.call(strcat, [dest, right_val])
                     return (dest, 'string')
 
-            # ==============================================
-            # Resto de operaciones numéricas (código existente)
-            # ==============================================
             if left_type == 'int' and right_type == 'float':
                 left_val = self.builder.sitofp(left_val, ir.DoubleType())
                 left_type = 'float'

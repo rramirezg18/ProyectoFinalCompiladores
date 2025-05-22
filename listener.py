@@ -43,7 +43,6 @@ class AnalizadorSemantico(GramaticaListener):
     def exitBloque(self, ctx: GramaticaParser.BloqueContext):
         self._exit_scope(ctx)
 
-    # En listener.py
     def exitDeclaracion_y_asignacion(self, ctx):
         var_name = ctx.VARIABLE().getText()
         expr_tipo = self.inferir_tipo_expr(ctx.expr())  # Obtener tipo de la expresión
@@ -55,7 +54,7 @@ class AnalizadorSemantico(GramaticaListener):
             if not self.tabla.tipos_compatibles(tipo_decl, expr_tipo):
                 self._error(
                     f"No se puede asignar '{expr_tipo}' a '{var_name}' de tipo '{tipo_decl}'", 
-                    ctx.expr()  # <- Usar el contexto de la expresión para el error
+                    ctx.expr()  # Usar el contexto de la expresión para el error
                 )
             self.tabla.agregar_variable(var_name, tipo_decl, linea)
         else:
@@ -102,7 +101,6 @@ class AnalizadorSemantico(GramaticaListener):
 
 
 
-    # En listener.py, método validar_llamada_funcion
     def validar_llamada_funcion(self, llamada_ctx):
         nombre = llamada_ctx.VARIABLE().getText()
         self.tabla.usar_funcion(nombre)  # Registrar uso
@@ -256,3 +254,22 @@ class AnalizadorSemantico(GramaticaListener):
     def enterLlamada_funcion(self, ctx: GramaticaParser.Llamada_funcionContext):
         nombre_funcion = ctx.VARIABLE().getText()
         self.tabla.usar_funcion(nombre_funcion)
+        
+
+    def enterSentencia_for(self, ctx: GramaticaParser.Sentencia_forContext):
+        self.tabla.push_env()  # Nuevo ámbito para el for
+
+    def exitSentencia_for(self, ctx: GramaticaParser.Sentencia_forContext):
+        self.tabla.pop_env()   # Eliminar ámbito del for
+
+    def enterDeclaracion_y_asignacion(self, ctx: GramaticaParser.Declaracion_y_asignacionContext):
+        if ctx.tipo():  # Es una declaración (ej: int i = 0)
+            # Verificar si está dentro de un for
+            if isinstance(ctx.parentCtx.parentCtx, GramaticaParser.Sentencia_forContext):
+                var_name = ctx.VARIABLE().getText()
+                tipo = ctx.tipo().getText()
+                linea = ctx.start.line
+                try:
+                    self.tabla.agregar_variable(var_name, tipo, linea)
+                except Exception as e:
+                    self._error(str(e), ctx)
