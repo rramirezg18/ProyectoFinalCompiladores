@@ -1,5 +1,38 @@
 extremo{
     main(){
+        print("HOY ES UN % GRAN DIA");
+        print("El resultado de 19^35 es " + 19^35);
+
+        print("Bryan + " + "Jonathan + " + "Jean + " + "Roberto");
+        print("el res de 3^333 es " + 3^333);
+
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        int zz = 33;
+        print(2^zz);
+        string jean = "hola";
+
+
+        float gg = 28^3;
+        print("el resultado de gg es " + gg);
+
+
+        print("Mi edad " + 31);
+
+        print("La pot de 5^5 es " + 5^5);
+
+
+        print(5^5+200);
+        print(8^88);
+        print(200^50/50);
+        print(88^8);
+        print(70^5/8);
+        print("EXTREMOOOOOOOOOOOOOOOOO");
+        print(2*18^4);
         print("aaaaaaaaaaaaaaaaaaaa");
         int num4 = 50;
         int num5 = 50;
@@ -7,8 +40,6 @@ extremo{
         print(50^50);
         print(88^75);
         int d = 90;
-        int kk = 30*25;
-        int ll = 12;
         print(num4^num4/2);
         print(num4^50/2);
         print(50^num5/20);
@@ -20,6 +51,12 @@ extremo{
         print(42^5/2);
         print(78/2^9);
         print(28/99^2+6);
+
+
+        for(int i = 0; i<= 100; i++){
+            print(2^i);
+            print("Hola " + i);
+        }
 
         print(5^5+2);
         print(78^25);
@@ -71,6 +108,7 @@ extremo{
         int resultadoF = fibonacci(50);
         print(resultadoF);
 
+        
 
         print(18*2+5*10/8+5*2+800000);
         print(88*88*88*88*88*5);
@@ -83,6 +121,16 @@ extremo{
         print(125^5);
         print(83^555);
         print(78^2+5);
+
+        int yy = 2;
+
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        print(2^zz);
 
 
         print(2 * 5);
@@ -102,6 +150,15 @@ extremo{
         }
 
 
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        print(2^zz);
+
+
         string juan = "Bry";
         print(juan);
 
@@ -117,6 +174,16 @@ extremo{
         print("pruebaaaaaaaaaaaas");
         print(funcionB(5));
         print(" ");
+
+
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        print(2^zz);
+
         
         float y = 25.0;
         print(x);
@@ -181,6 +248,12 @@ extremo{
         print(83^555);
         print(78^2+5);
 
+
+
+        int resultadoFFF = fibonacci(50);
+        print(resultadoFFF);
+
+
         print(2 * 5);
         print(2 + x * 4);
         print((2 + 3) * 4);
@@ -198,11 +271,15 @@ extremo{
         print(42^5/2);
         print(78/2^9);
         print(28/99^2+6);
+
+
+        int resultadoFFFF = fibonacci(50);
+        print(resultadoFFFF);
         
         print(5^5+2);
         print(78^25);
         print(125^5);
-        print(83^555);
+        print(83^55);
         print(78^2+5);
 
     }
@@ -273,5 +350,3 @@ extremo{
 
 
 }
-
-

@@ -1,0 +1,838 @@
+extremo{
+    main(){
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        int zz = 33;
+        print(2^zz);
+
+        print(5^5+200);
+        print(8^88);
+        print(200^50/50);
+        print(88^8);
+        print(70^5/8);
+        print(2*18^4);
+        int num4 = 50;
+        int num5 = 50;
+        print(num4^num5);
+        print(50^50);
+        print(88^75);
+        int d_val = 90; 
+        print(d_val);
+        print(num4^num4/2);
+        print(num4^50/2);
+        print(50^num5/20);
+        for(int w = 0; w <= 20; w++){
+            print(num4^w/num5);
+            print(w);
+        }
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+
+        for(int i_main = 0; i_main <= 25; i_main++){
+            print(2^i_main);
+            print(i_main);
+            print(i_main*i_main - i_main + 100);
+        }
+
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^55); 
+        print(78^2+5);
+        float div_main = 100/5;
+        print(div_main);
+
+        print(3*5+2-88+250/2+789*2+56*2+300-7896);
+        print(23^23);
+        int var_main = 5;
+        float t_main = 88^6+250*2;
+        print(t_main);
+        t_main = t_main -10;
+        print(var_main+250^2);
+        print(var_main);
+        var_main = 2;
+        print(var_main);
+        int p_main = 10;
+        while (p_main >= 0) {
+            print(p_main*100 - 50);
+            p_main = p_main - 1;
+        }
+
+        print(2^var_main+(55*200^2+(58*2)));
+        print(6^6+2);
+        int x_orig_main = 10; 
+        int x_main = x_orig_main;
+        int variable_main = 10;
+        print(100^variable_main);
+        print(55^variable_main+(300));
+        print(variable_main+300*55);
+
+        print(5-25*(3+5));
+        
+        for(int k_main = 0; k_main <= 10; k_main++){
+            print(5-25*(3+5) + k_main*2);
+            print(k_main);
+        }
+
+        float z_float_main = 5^20; 
+        print(z_float_main-1);
+        int resultadoF_main = fibonacci(50); 
+        print(resultadoF_main);
+        
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^55); 
+        print(78^2+5);
+
+        int yy_main = 2;
+        print(yy_main);
+
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        print(2^zz);
+
+        x_main = x_orig_main; 
+        print(2 * 5);
+        print(2 + x_main * 4);
+        print((2 + 3) * 4);
+        print(10 / 2);
+        print(2 ^ 3);
+        print(2 ^ 3 ^ 2);
+        print(5 + 3 * 2 - 4 / 2);
+        print((3 + 4) * 2 ^ 3 - 10 / 2);
+        print(5 / 2);
+        print(2 + 4 * (-2));
+
+        for(int j_main = 0; j_main < 15; j_main++){
+            print(j_main);
+            print(2^j_main);
+            print(j_main*j_main);
+        }
+
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        print(2^zz);
+
+        suma();
+
+        int a_val_main = 10;
+        int b_val_main = doble(a_val_main);
+        print(b_val_main);
+
+        print(funcionB(5));
+
+        print(55^5/5);
+        print(99*5^3);
+        print(3000/4*(9000));
+        print(88-2+85*18/100^4);
+        print(100/2*88);
+        print(58^58);
+        print(2^zz);
+        
+        float y_float_main = 25.0;
+        x_main = x_orig_main; 
+        print(x_main);
+        print(y_float_main);
+        print(7+2+3^12);
+        print((2^5*(5^2)));
+        print(5*5^25);
+        print(2*23-23);
+        print(30^x_main);
+        print(2*2*2/2+2*2+2*2+2*2+2*2+2*2);
+        print(x_main^x_main+(2*5));
+        if(x_main > 15){
+            print(x_main); 
+        } else {
+            print(x_main); 
+        }
+        
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^55); 
+        print(78^2+5);
+
+        x_main = x_orig_main; 
+        while(x_main > 0){
+            print(x_main);
+            print(x_main);
+            x_main = x_main - 1;  
+        }
+
+        for(int i_loop_main = 0; i_loop_main <= 30; i_loop_main++){
+            print(i_loop_main);
+            print(i_loop_main * 2);
+        }
+        
+        contarHasta(5);
+        print(potencia(2, 3));
+        print(sumar(5, 7));
+        int resultadoSumaHasta_main = sumaHasta(5);
+        print(resultadoSumaHasta_main);
+
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^55); 
+        print(78^2+5);
+
+        int resultadoFFF_main = fibonacci(50); 
+        print(resultadoFFF_main);
+
+        x_main = 0; 
+        print(2 * 5);
+        print(2 + x_main * 4);
+        print((2 + 3) * 4);
+        print(10 / 2);
+        print(2 ^ 3);
+        print(2 ^ 3 ^ 2);
+        print(5 + 3 * 2 - 4 / 2);
+        print((3 + 4) * 2 ^ 3 - 10 / 2);
+        print(5 / 2);
+        print(2 + 4 * (-2));
+
+        print(18*2+5*10/8+5*2+800000);
+        print(88*88*88*88*88*5);
+        print(42^5/2);
+        print(78/2^9);
+        print(28/99^2+6);
+
+        int resultadoFFFF_main = fibonacci(50); 
+        print(resultadoFFFF_main);
+        
+        print(5^5+2);
+        print(78^25);
+        print(125^5);
+        print(83^55);
+        print(78^2+5);
+
+        int varA_main = 100;
+        int varB_main = 200;
+        int varC_main = 300;
+        print(varA_main + varB_main + varC_main);
+        print(varA_main * varB_main - varC_main);
+        print(varC_main / varA_main + varB_main);
+        print(varA_main ^ 2 + varB_main ^ 2);
+
+        for (int count1_main = 0; count1_main < 5; count1_main++) {
+            print(count1_main);
+            print(varA_main * count1_main);
+            for (int count2_main = 0; count2_main < 3; count2_main++) {
+                print(count2_main);
+                print(varB_main * count2_main - count1_main);
+                if (count1_main == count2_main) {
+                    print(1); 
+                } else {
+                    print(0); 
+                }
+            }
+        }
+
+        print(multiplicar(10, 20));
+        print(dividir(100.0, 4.0));
+        print(esPar(7));
+        print(esPar(8));
+
+        int val1_main = 1;
+        while (val1_main < 15) {
+            print(val1_main);
+            if (val1_main % 2 == 0) {
+                print(val1_main); 
+            } else {
+                print(val1_main); 
+            }
+            if (val1_main > 10) {
+                print(val1_main); 
+            }
+            val1_main = val1_main + 3; 
+        }
+ 
+        print(30);
+
+        float f1_main = 10.5;
+        float f2_main = 2.5;
+        print(f1_main + f2_main);
+        print(f1_main * f2_main);
+        print(f1_main / f2_main);
+        print(f1_main - f2_main);
+        print(f1_main ^ 2);
+
+        int arr_sim_1_main = 10;
+        int arr_sim_2_main = 20;
+        int arr_sim_3_main = 30;
+        int arr_sim_4_main = 40;
+        int arr_sim_5_main = 50;
+
+        print(arr_sim_1_main + arr_sim_2_main);
+        print(arr_sim_3_main - arr_sim_1_main);
+        print(arr_sim_4_main * 2);
+        print(arr_sim_5_main / 5);
+        print(arr_sim_1_main ^ 3);
+
+        for (int idx_main = 1; idx_main <= 5; idx_main++) {
+            print(idx_main);
+            if (idx_main == 1) { print(arr_sim_1_main); }
+            if (idx_main == 2) { print(arr_sim_2_main); }
+            if (idx_main == 3) { print(arr_sim_3_main); }
+            if (idx_main == 4) { print(arr_sim_4_main); }
+            if (idx_main == 5) { print(arr_sim_5_main); }
+        }
+        
+        print(potencia(3,4));
+        print(sumar(100, 234));
+        print(doble(77));
+        print(funcionA(25));
+        print(funcionB(12));
+
+        int counterGlobal_main = 0;
+        while(counterGlobal_main < 10){
+            print(counterGlobal_main);
+            int innerCounter_main = 0;
+            while(innerCounter_main < 3){
+                print(innerCounter_main);
+                print(counterGlobal_main);
+                print( (counterGlobal_main + 1) * (innerCounter_main + 1) * 100 );
+                innerCounter_main = innerCounter_main + 1; 
+            }
+            counterGlobal_main = counterGlobal_main + 1; 
+        }
+
+        print(1000*2+3000/10-5);
+        print(7^3+8^3+9^3);
+        print( (1+2+3+4+5)^2 );
+        print( 9999/33 + 2222/11 );
+
+        int num_a_main = 1;
+        int num_b_main = 1;
+        for(int fib_idx_main = 0; fib_idx_main < 10; fib_idx_main++){ 
+            print(num_a_main);
+            int temp_fib_main = num_a_main + num_b_main;
+            num_a_main = num_b_main;
+            num_b_main = temp_fib_main;
+        }
+
+        int loopVar1_decl_main = 0; 
+        for(loopVar1_decl_main = 0; loopVar1_decl_main < 8; loopVar1_decl_main++){
+            print(loopVar1_decl_main);
+            int loopVar2_decl_main = 0; 
+            for(loopVar2_decl_main = 0; loopVar2_decl_main < loopVar1_decl_main; loopVar2_decl_main++){
+                print(loopVar2_decl_main);
+                print( (loopVar1_decl_main * 10) + loopVar2_decl_main );
+            }
+        }
+
+        print(calcularAreaCuadrado(10));
+        print(calcularAreaCuadrado(25));
+        print(calcularAreaRectangulo(5,8));
+        print(calcularAreaRectangulo(10,20));
+
+        int checkNum_main = 17;
+        if(esPar(checkNum_main)){
+            print(checkNum_main);
+        } else {
+            print(checkNum_main);
+            if(checkNum_main > 10){
+                print(checkNum_main);
+            } else {
+                print(checkNum_main);
+            }
+        }
+
+        checkNum_main = 22;
+        if(esPar(checkNum_main)){
+            print(checkNum_main);
+             if(checkNum_main > 20){
+                print(checkNum_main);
+            } else {
+                print(checkNum_main);
+            }
+        } else {
+            print(checkNum_main);
+        }
+
+        print(100/4*3+7-1);
+        print(2^8 / 4);
+        print( (50+50) * (3-1) );
+        print( 123+456+789 );
+        print( 987-654-321 );
+        print( 1*2*3*4*5*6 );
+        print( 1000000 / 10 / 10 / 10 );
+        print( 77*11 + 33*22 );
+        print( 5^2 + 12^2 ); 
+        print( (100-1)*(100+1) );
+
+        int iter1_main = 0;
+        while(iter1_main < 7){
+            print(iter1_main);
+            int iter2_main = 6;
+            while(iter2_main > iter1_main){
+                print(iter2_main);
+                print(iter1_main);
+                print(iter1_main * 100 + iter2_main);
+                iter2_main = iter2_main -1; 
+            }
+            iter1_main = iter1_main + 1; 
+        }
+        
+        print(procesarNumero(10));
+        print(procesarNumero(7));
+        print(procesarNumero(0));
+        print(procesarNumero(-5));
+
+        for(int str_idx_main = 0; str_idx_main < 5; str_idx_main++){
+            print(str_idx_main);
+            if(str_idx_main % 2 == 0){
+                print(str_idx_main);
+            }
+        }
+
+        print(1+2-3*4/5^6+7-8*9/10);
+        print( ( ( (5*4) - (3*2) ) + ( (2^3) * 2) ) / 2 );
+        print( 100 * 99 / 98 + 97 - 96 * 95 );
+
+        int valX_main = 50;
+        int valY_main = 10;
+        int valZ_main = 5;
+
+        for(int opLoop_main = 0; opLoop_main < 4; opLoop_main++){
+            if(opLoop_main == 0){ print(valX_main + valY_main * valZ_main); }
+            if(opLoop_main == 1){ print((valX_main + valY_main) * valZ_main); }
+            if(opLoop_main == 2){ print(valX_main - valY_main / valZ_main); }
+            if(opLoop_main == 3){ print((valX_main - valY_main) / valZ_main); }
+            print(opLoop_main);
+        }
+
+        print(factorial(5));
+        print(factorial(7));
+        
+        int anotherX_main = 10;
+        print(anotherX_main);
+        print(2 + anotherX_main * 40);
+        print((20 + 30) * 4);
+        print(1000 / 20);
+        print(20 ^ 3);
+        print(2 ^ 3 ^ 2); 
+        print(50 + 30 * 20 - 40 / 2);
+        print((30 + 40) * 2 ^ 3 - 100 / 2);
+        print(50 / 20);
+        print(20 + 40 * (-2));
+
+        for(int finalLoop_main = 0; finalLoop_main < 20; finalLoop_main++){
+            print(finalLoop_main);
+            print(finalLoop_main ^ 2 + finalLoop_main * 10 + 500);
+            if(finalLoop_main % 3 == 0){
+                print(finalLoop_main);
+            }
+        }
+        print(fibonacci(18));
+        print(sumar(doble(potencia(2,5)), funcionA(100)));
+        print(funcionB(sumaHasta(4)));
+
+        int iter_exp_1 = 0;
+        while(iter_exp_1 < 500){
+            print(iter_exp_1 * 2 + 10000);
+            int iter_exp_2 = 0;
+            for(iter_exp_2 = 0; iter_exp_2 < 5; iter_exp_2++){
+                print(iter_exp_1 + iter_exp_2 + potencia(2, iter_exp_2));
+                print(multiplicar(iter_exp_1, iter_exp_2));
+                if(esPar(iter_exp_1 + iter_exp_2)){
+                    print(iter_exp_1 - iter_exp_2);
+                } else {
+                    print(iter_exp_1 ^ iter_exp_2);
+                }
+            }
+            iter_exp_1 = iter_exp_1 + 1;
+        }
+        
+        int var_g1 = 100; int var_g2 = 200; int var_g3 = 300; int var_g4 = 400; int var_g5 = 500;
+        int loop_count_A = 0;
+        for(loop_count_A = 0; loop_count_A < 100; loop_count_A++){
+            print(var_g1 + loop_count_A);
+            print(var_g2 - loop_count_A);
+            print(var_g3 * loop_count_A);
+            if (loop_count_A % 10 == 0){
+                 print(var_g4 / (loop_count_A / 10 + 1));
+            }
+            print(var_g5 ^ (loop_count_A % 3 + 1));
+            print(potencia(loop_count_A % 5 + 2, 3));
+            print(sumar(loop_count_A, loop_count_A * 2));
+            print(doble(loop_count_A + 10));
+            print(factorial(loop_count_A % 6));
+            
+            int nested_loop_A = 0;
+            for(nested_loop_A = 0; nested_loop_A < 3; nested_loop_A++){
+                print(loop_count_A * 100 + nested_loop_A);
+                print(var_g1 + var_g2 + nested_loop_A);
+                print(funcionA(loop_count_A + nested_loop_A));
+                print(funcionB(nested_loop_A + 1));
+            }
+        }
+
+        int while_var_A = 0;
+        while(while_var_A < 150){
+            print(while_var_A);
+            print(procesarNumero(while_var_A - 75));
+            print(calcularAreaCuadrado(while_var_A % 10 + 1));
+            print(calcularAreaRectangulo(while_var_A % 5 + 1, while_var_A % 7 + 1));
+            
+            int nested_while_A = 0;
+            while(nested_while_A < 2){
+                print(while_var_A + nested_while_A * 1000);
+                print(esPar(while_var_A + nested_while_A));
+                nested_while_A = nested_while_A + 1;
+            }
+            if(while_var_A % 25 == 0){
+                print(fibonacci(while_var_A % 10 + 5 ));
+            }
+            while_var_A = while_var_A + 1;
+        }
+        
+        int i_rep = 0;
+        for(i_rep = 0; i_rep < 20; i_rep++){
+            print(55^5/5 + i_rep);
+            print(99*5^3 - i_rep);
+            print(3000/4*(9000) + i_rep*10);
+            print(88-2+85*18/100^4 + i_rep/10.0);
+            print(100/2*88 - i_rep*2);
+            print(58^58); 
+            print(2^zz + i_rep);
+            print(5^5+200 + i_rep*3);
+            print(8^88); 
+            print(200^50/50); 
+            print(88^8); 
+            print(70^5/8 + i_rep);
+            print(2*18^4 - i_rep);
+            print(num4^num5); 
+            print(50^50); 
+            print(88^75); 
+            print(d_val + i_rep);
+            print(num4^num4/2 + i_rep);
+            print(num4^50/2 - i_rep);
+            print(50^num5/20 + i_rep);
+            print(18*2+5*10/8+5*2+800000 + i_rep*100);
+            print(88*88*88*88*88*5); 
+            print(42^5/2 + i_rep);
+            print(78/2^9 - i_rep);
+            print(28/99^2+6 + i_rep);
+            print(5^5+2 + i_rep*5);
+            print(78^25); 
+            print(125^5); 
+            print(83^55); 
+            print(78^2+5 + i_rep);
+            print(div_main + i_rep/2.0);
+            print(3*5+2-88+250/2+789*2+56*2+300-7896 - i_rep*10);
+            print(23^23); 
+            print(t_main + i_rep);
+            print(var_main+250^2 + i_rep);
+            print(2^var_main+(55*200^2+(58*2)) + i_rep);
+            print(6^6+2 - i_rep);
+            print(100^variable_main); 
+            print(55^variable_main+(300)); 
+            print(variable_main+300*55 + i_rep);
+            print(5-25*(3+5) + i_rep);
+            print(z_float_main-1 + i_rep);
+            print(resultadoF_main + i_rep);
+            print(yy_main + i_rep);
+            print(2 * 5 + i_rep);
+            print(2 + x_orig_main * 4 - i_rep);
+            print((2 + 3) * 4 + i_rep);
+            print(10 / 2 - i_rep);
+            print(2 ^ 3 + i_rep);
+            print(2 ^ 3 ^ 2); 
+            print(5 + 3 * 2 - 4 / 2 + i_rep);
+            print((3 + 4) * 2 ^ 3 - 10 / 2 - i_rep);
+            print(5 / 2 + i_rep/5.0);
+            print(2 + 4 * (-2) - i_rep);
+            print(b_val_main + i_rep);
+            print(funcionB(5+i_rep));
+            print(y_float_main + i_rep/3.0);
+            print(7+2+3^12 + i_rep);
+            print((2^5*(5^2)) - i_rep);
+            print(5*5^25); 
+            print(2*23-23 + i_rep);
+            print(30^x_orig_main); 
+            print(2*2*2/2+2*2+2*2+2*2+2*2+2*2 - i_rep);
+            print(x_orig_main^x_orig_main+(2*5) + i_rep);
+            print(resultadoSumaHasta_main + i_rep);
+            print(resultadoFFF_main + i_rep);
+            print(resultadoFFFF_main + i_rep);
+            print(varA_main + varB_main + varC_main + i_rep);
+            print(varA_main * varB_main - varC_main - i_rep);
+            print(varC_main / varA_main + varB_main + i_rep);
+            print(varA_main ^ 2 + varB_main ^ 2 - i_rep);
+            print(multiplicar(10+i_rep, 20-i_rep));
+            print(dividir(100.0+i_rep, 4.0+i_rep%2+1));
+            print(esPar(7+i_rep));
+            print(esPar(8+i_rep));
+            print(f1_main + f2_main + i_rep);
+            print(f1_main * f2_main - i_rep);
+            print(f1_main / f2_main + i_rep/2.0);
+            print(f1_main - f2_main - i_rep/2.0);
+            print(f1_main ^ 2 + i_rep);
+            print(arr_sim_1_main + arr_sim_2_main + i_rep);
+            print(arr_sim_3_main - arr_sim_1_main - i_rep);
+            print(arr_sim_4_main * 2 + i_rep);
+            print(arr_sim_5_main / 5 - i_rep);
+            print(arr_sim_1_main ^ 3 + i_rep);
+            print(potencia(3+i_rep%3,4-i_rep%2));
+            print(sumar(100+i_rep, 234-i_rep));
+            print(doble(77+i_rep));
+            print(funcionA(25+i_rep));
+            print(funcionB(12+i_rep));
+            print(1000*2+3000/10-5 + i_rep*10);
+            print(7^3+8^3+9^3 - i_rep*5);
+            print( (1+2+3+4+5)^2 + i_rep);
+            print( 9999/33 + 2222/11 - i_rep);
+            print(calcularAreaCuadrado(10+i_rep));
+            print(calcularAreaCuadrado(25-i_rep));
+            print(calcularAreaRectangulo(5+i_rep,8+i_rep));
+            print(calcularAreaRectangulo(10-i_rep%5,20-i_rep%5));
+            print(procesarNumero(10+i_rep));
+            print(procesarNumero(7-i_rep));
+            print(procesarNumero(0-i_rep));
+            print(procesarNumero(-5-i_rep));
+            print(1+2-3*4/5^6+7-8*9/10 + i_rep/100.0);
+            print( ( ( (5*4) - (3*2) ) + ( (2^3) * 2) ) / 2 + i_rep);
+            print( 100 * 99 / 98 + 97 - 96 * 95 - i_rep);
+            print(factorial(5+i_rep%3));
+            print(factorial(7-i_rep%4));
+            print(anotherX_main + i_rep);
+            print(2 + anotherX_main * 40 - i_rep);
+            print((20 + 30) * 4 + i_rep);
+            print(1000 / 20 - i_rep);
+            print(20 ^ 3 + i_rep);
+            print(50 + 30 * 20 - 40 / 2 - i_rep);
+            print((30 + 40) * 2 ^ 3 - 100 / 2 + i_rep);
+            print(50 / 20 + i_rep/4.0);
+            print(20 + 40 * (-2) - i_rep);
+            print(fibonacci(18-i_rep%5));
+            print(sumar(doble(potencia(2,5-i_rep%3)), funcionA(100-i_rep*2)));
+            print(funcionB(sumaHasta(4+i_rep%2)));
+        }
+        
+        int outer_idx = 0;
+        for(outer_idx = 0; outer_idx < 60; outer_idx++){
+            int inner_idx = 0;
+            float acc_float = 0.0;
+            int acc_int = 0;
+            for(inner_idx = 0; inner_idx < 10; inner_idx++){
+                acc_int = acc_int + outer_idx * inner_idx + potencia(inner_idx, 2);
+                acc_float = acc_float + dividir(toFloat(outer_idx + 1), toFloat(inner_idx + 1)) + toFloat(inner_idx);
+                print(acc_int);
+                print(acc_float);
+                if(esPar(acc_int)){
+                    print(doble(acc_int));
+                }
+                print(multiplicar(acc_int % 100, outer_idx + 1));
+                print(factorial(inner_idx % 7));
+            }
+            print(sumaHasta(outer_idx % 10 + 5));
+        }
+
+
+    }
+
+    int potencia(int base, int exponente) {
+        int resultado = 1;
+        if (exponente == 0){
+            return 1;
+        }
+        if (exponente < 0){
+            return 0; 
+        }
+        int i_pot = 0;
+        for(i_pot = 0; i_pot < exponente; i_pot++){
+            resultado = resultado * base;
+        }
+        return resultado;
+    }
+
+    int sumar(int a, int b) {
+        return a + b;
+    }
+
+    int sumaHasta(int n) {
+        int suma_val = 0;
+        int contador = 1;
+        while (contador <= n) { 
+            suma_val = suma_val + contador;
+            contador = contador + 1; 
+        }
+        return suma_val;
+    }
+
+    int contarHasta(int n) {
+        int i_ch = 0;
+        for (i_ch = 1; i_ch <= n; i_ch++) { 
+            print(i_ch);
+            print(i_ch);
+        }
+        return 0;
+    }
+
+    int funcionA(int n_fa){
+        print(n_fa);
+        return n_fa * 2;
+    }
+    
+    int funcionB(int x_param_fb){
+        print(x_param_fb);
+        int temp_fb = funcionA(x_param_fb);
+        print(temp_fb);
+        return temp_fb * 3;
+    }
+
+    int doble(int a_param_d){
+        print(a_param_d);
+        return a_param_d * 2;
+    }
+
+    int suma(){
+        int num1_s = 10;
+        int num2_s = 20;
+        int num3_s = 30;
+        int resultado_s = num1_s + num2_s + num3_s;
+        print(resultado_s);
+        return resultado_s; 
+    }
+
+    int fibonacci(int n_fib){
+        if(n_fib == 0){
+            return 0;
+        }
+        if(n_fib == 1){
+            return 1;
+        }
+        if(n_fib < 0){
+            return -1; 
+        }
+        if(n_fib > 20){ 
+            return fibonacci(20); 
+        }
+        return fibonacci(n_fib-1) + fibonacci(n_fib-2);
+    }
+
+    int multiplicar(int a_m, int b_m){
+        print(a_m);
+        print(b_m);
+        return a_m * b_m;
+    }
+
+    float dividir(float num_d, float den_d){
+        print(num_d);
+        print(den_d);
+        if (den_d == 0.0) {
+            return 0.0; 
+        }
+        return num_d / den_d;
+    }
+
+    boolean esPar(int num_ep){
+        print(num_ep);
+        if (num_ep % 2 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    int calcularAreaCuadrado(int lado_cac){
+        print(lado_cac);
+        return lado_cac * lado_cac;
+    }
+
+    int calcularAreaRectangulo(int base_car, int altura_car){
+        print(base_car);
+        print(altura_car);
+        return base_car * altura_car;
+    }
+    
+    int procesarNumero(int num_pn){
+        print(num_pn);
+        if(num_pn > 0){
+            return num_pn * 10;
+        }
+        if(num_pn < 0){
+            return num_pn * 2;
+        }
+        return 0;
+    }
+
+    int factorial(int n_fact) {
+        if (n_fact < 0) {
+            return -1; 
+        }
+        if (n_fact == 0) {
+            return 1;
+        }
+        if (n_fact > 10) { 
+            n_fact = 10;
+        }
+        int resultado_fact = 1;
+        int i_fact = 1;
+        for (i_fact = 1; i_fact <= n_fact; i_fact++) { 
+            resultado_fact = resultado_fact * i_fact;
+        }
+        print(n_fact);
+        print(resultado_fact);
+        return resultado_fact;
+    }
+
+    float toFloat(int val_tf){
+        return val_tf / 1.0;
+    }
+
+    int calcularTriple(int n_ct){
+        print(n_ct);
+        return n_ct * 3;
+    }
+
+    float calcularPromedio(float a_cp, float b_cp, float c_cp){
+        print(a_cp);
+        print(b_cp);
+        print(c_cp);
+        return (a_cp + b_cp + c_cp) / 3.0;
+    }
+
+    boolean esPositivo(int n_epos){
+        print(n_epos);
+        if(n_epos > 0){
+            return true;
+        }
+        return false;
+    }
+}

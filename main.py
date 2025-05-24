@@ -313,8 +313,7 @@ def compilar(optimizar=False, solo_ir=False):
 
 
 def compilar_desde_ir():
-    total_start = time.monotonic()
-    phase_times = []  # Lista para almacenar tiempos de fase
+    phase_times = []  # Lista para almacenar el tiempo de compilación
     
     try:
         # Listar archivos .ll en la carpeta optManual
@@ -347,17 +346,17 @@ def compilar_desde_ir():
         
         try:
             with Timer("Compilación a binario", phase_times):
-                # Compilar a objeto
+                # 1. Compilar a objeto con posición independiente
                 subprocess.run([
-                    "llc", 
+                    "llc",
                     "-filetype=obj",
                     "-relocation-model=pic",
-                    archivo_ll, 
-                    "-o", 
+                    archivo_ll,
+                    "-o",
                     f"{nombre_base}.o"
                 ], check=True)
                 
-                # Generar ejecutable
+                # 2. Generar ejecutable deshabilitando PIE
                 subprocess.run([
                     "clang",
                     "-o", 
@@ -379,42 +378,30 @@ def compilar_desde_ir():
                 if resultado.stderr:
                     print(resultado.stderr)
 
-            # Mostrar tiempos si todo fue bien
-            print("\nTiempos por fase:")
-            for phase_name, elapsed in phase_times:
-                td = timedelta(seconds=elapsed)
-                print(f"{phase_name.ljust(25)} {td}")
-
-            total_elapsed = timedelta(seconds=time.monotonic() - total_start)
-            print(f"\n! TIEMPO TOTAL DE COMPILACIÓN: {total_elapsed}")
+            # Mostrar tiempos (fase y total son iguales)
+            if phase_times:
+                fase, tiempo = phase_times[0]
+                td = timedelta(seconds=tiempo)
+                print(f"\nTiempos por fase:")
+                print(f"{fase.ljust(25)} {td}")
+                print(f"\n! TIEMPO TOTAL DE COMPILACIÓN: {td}")
 
         except subprocess.CalledProcessError as e:
-            # Mostrar tiempos acumulados hasta el error
-            if phase_times:
-                print("\nTiempos por fase hasta el error:")
-                for phase_name, elapsed in phase_times:
-                    td = timedelta(seconds=elapsed)
-                    print(f"{phase_name.ljust(25)} {td}")
-
-            total_elapsed = timedelta(seconds=time.monotonic() - total_start)
             print(f"\n✗ Error en compilación: {str(e)}")
-            print(f"! TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
-            
-        except Exception as e:
             if phase_times:
-                print("\nTiempos por fase hasta el error:")
-                for phase_name, elapsed in phase_times:
-                    td = timedelta(seconds=elapsed)
-                    print(f"{phase_name.ljust(25)} {td}")
-
-            total_elapsed = timedelta(seconds=time.monotonic() - total_start)
+                fase, tiempo = phase_times[0]
+                td = timedelta(seconds=tiempo)
+                print(f"Tiempo hasta el error: {td}")
+                
+        except Exception as e:
             print(f"\n✗ Error inesperado: {str(e)}")
-            print(f"! TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
+            if phase_times:
+                fase, tiempo = phase_times[0]
+                td = timedelta(seconds=tiempo)
+                print(f"Tiempo hasta el error: {td}")
                 
     except Exception as e:
-        total_elapsed = timedelta(seconds=time.monotonic() - total_start)
         print(f"\n✗ Error general: {str(e)}")
-        print(f"! TIEMPO TOTAL HASTA EL ERROR: {total_elapsed}")
 
 def main():
     llvm.initialize()
